@@ -1,2 +1,2 @@
 def foo():
-    return 0
+    print("Soltem o macaco")
