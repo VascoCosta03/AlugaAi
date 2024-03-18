@@ -1,0 +1,49 @@
+nav {
+    background-color: rgb(204, 202, 202);
+    font: New-times-roman;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+article {
+    background-color: rgb(204, 202, 202);
+    font: New-times-roman;
+    padding: 5px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+nav img {
+    margin-right: 10px;
+}
+
+article img {
+    margin-right: 10px;
+}
+
+aside{
+    background-color: rgb(29, 167, 185);
+    font: arial;
+    font-size: large;
+    font-weight: bolder;
+    text-align: center;
+}
+
+main{
+    background-color: rgb(29, 167, 185);
+    font: New-times-roman;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+footer{
+    background-color: rgb(29, 167, 185);
+}
+
+html{
+    background-color: rgb(29, 167, 185);
+}
