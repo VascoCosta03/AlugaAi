@@ -1,0 +1,17 @@
+ body{
+    background-color: aqua;
+    font-family: "Times New Roman", Tahoma, arial;
+    width: 500px;
+    margin: 30px;
+    padding: 40px;
+    border: 5px solid ;
+ }
+ h2{
+    line-height: 200%;
+    border: 5px solid;
+    border-radius: 30px;
+ }
+ table, th, td, tr{
+    border: 1px solid;
+    border-collapse: collapse;
+ }
