@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melhor página</title>
+
+    <script>
+        function Verificar(e) {
+            e.preventDefault();
+            clube = document.getElementById("clube").value;
+            if (clube != "3") {
+                alert("Resposta errada!");
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>VIVA AO SPORTING</h1>
+    <p>SPORTING 2023/2024</p>
+    <a href="index.html">Voltar</a>
+    <br>
+    <div id="formulario">
+        <h2>Preencha corretamente o formulário</h2>
+        <form>
+            <input type="text" name="nome" id="nome" placeholder="Seu nome..."><br>
+            <input type="email" name="email" id="email" placeholder="Seu email..."><br>
+            <input type="number" name="idade" id="idade" placeholder="Sua idade..."><br>
+
+            <input type="radio" name="clube" id="scp" value="3">
+            <label for="scp">Sporting</label>
+            <input type="radio" name="clube" id="slb" value="2">
+            <label for="slb">Benfica</label>
+            <input type="radio" name="clube" id="fcp" value="1">
+            <label for="fcp">Porto</label>
+
+            <br>
+            <input type="checkbox" name="bonito" id="bonito">
+            <label for="bonito">É bonito?</label>
+            <br>
+            <textarea name="notas_particulares" id="notas_particulares" cols="45" rows="10"></textarea>
+            <br>
+            <input type="submit" value="Verificar">
+        </form>
+    </div>
+</body>
+
+</html>
