@@ -4,22 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página 1 do teste</title>
+    <style>
+      body {
+        background-color: lightpink;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: blue;
+      }
+    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
-  <img>
-    <h1 style="text-align: center"><i>Olá professor!</i></h1>
-    <h2>Esta aqui é a primeira página do <mark>miniteste</mark></h2>
-    <strong
-      >E aqui demonstro as várias razões pelas quais devia ter boa nota</strong
-    >
-    <small>
-      <em>Por favor, não me desça a nota por causa do HTML</em>
-    </small>
-    <figure>
-        <img src="download.jpg" alt="Imagem de homem a programar"/>
-        <figcaption>Imagem de eu a programar</figcaption>
-    </figure>
+  <body>
+    <div style="background-color: white; width: 100%; position: fixed; top: 0; z-index: 100; display: flex; align-items: center; justify-content: center; height: 75px;">
+      <h1><span class="titulo"><i>Olá professor!</i></span></h1>
+    </div>
+    <h2 style="text-align: center; margin-top: 80px;">Esta aqui é a primeira página do <mark style="background: red;">miniteste</mark></h2>
+    <div style="text-align: center;">
+      <div>
+        <strong class="strong">
+          E aqui demonstro as várias razões pelas quais devia ter boa nota
+        </strong>
+      </div>
+      <div>
+        <small>
+          <em>Por favor, não me desça a nota por causa do HTML</em>
+        </small>
+      </div>
+    </div>
+      <figure style="text-align: center; margin: 50px">
+        <img class="imagem" src="download.jpg" alt="Imagem de homem a programar"/>
+        <figcaption class="texto-imagem">Imagem de eu a programar</figcaption>      </figure>
     <table style="width: 300px; text-align: center;">
-        <caption style="caption-side: bottom; margin-top: 20px;">Aqui estão alguns nomes e idades</caption>
+        <caption style="caption-side: top; margin-bottom: 10px;">Aqui estão alguns nomes e idades</caption>
         <tr>
             <th>Nome</th>
             <th>Idade</th>
@@ -33,11 +50,15 @@
             <td>21</td>
         </tr>        
     </table>
-    <a href="https://www.sporting.pt/">Isto aqui é um link para o melhor clube do mundo</a>
+    <p style="text-align: center; margin-top: 50px;">Aqui estão alguns links:</p>
+    <div style="display: flex; justify-content: center; margin: 30px;">
+    <a href="https://www.sporting.pt/" style="margin-right: 30px;">Isto aqui é um link para o melhor clube do mundo</a>
     <a href="teste2.html">
-        <button>Este botão leva para a segunda página do teste</button>
+        <button class="botao-pagina-1">Este botão leva para a segunda página do teste</button>
     </a>
-
-    <footer style="position: fixed; bottom: 0; left: 0; width: 100%; text-align: center;">Obrigado!</footer>
+  </div>
+  <div style="background-color: lightgray; width: 100%; position: fixed; bottom: 0; z-index: 100; height: 50px; display: flex; align-items: center; justify-content: center;">
+    <footer>Obrigado!</footer>
+  </div>
   </body>
 </html>

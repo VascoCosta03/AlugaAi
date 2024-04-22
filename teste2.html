@@ -4,28 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página 2 do teste</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background-color: lightsalmon;
+        font-family: Arial, sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <a href="teste1.html">
-      <button>Este botão leva de volta para a página 1</button>
-    </a>
+    <div class="header-pagina-2">
+      <a href="teste1.html">
+        <button class="botao-pagina-2">
+          Este botão leva de volta para a página 1
+        </button>
+      </a>
+    </div>
+    <div class="forms">
+      <form>
+        <h3 style="padding-bottom: 10px">Escolha a sua linguagem favorita:</h3>
+        <input type="radio" id="html" name="fav_language" value="HTML" />
+        <label for="html">HTML</label><br />
+        <input type="radio" id="css" name="fav_language" value="CSS" />
+        <label for="css">CSS</label><br />
+        <input type="radio" id="js" name="fav_language" value="JavaScript" />
+        <label for="js">JavaScript</label>
+      </form>
 
-    <p>Escolhe a sua linguagem preferida</p>
-    <form>
-      <input type="radio" id="html" name="fav_language" value="HTML" />
-      <label for="html">HTML</label><br />
-      <input type="radio" id="css" name="fav_language" value="CSS" />
-      <label for="css">CSS</label><br />
-      <input type="radio" id="js" name="fav_language" value="JavaScript"/>
-      <label for="js">JavaScript</label>
-    </form>
-
-    <form action="resultado.html">
-      <label for="fname">Primeiro nome:</label><br />
-      <input type="text" id="fname" name="fname" value="" /><br />
-      <label for="lname">Último nome:</label><br />
-      <input type="text" id="lname" name="lname" value="" /><br /><br />
-      <input type="submit" value="Submit" />
-    </form>
+      <form action="resultado.html">
+        <h3 style="padding-bottom: 10px">Introduza o seu nome:</h3>
+        <label for="fname" style="color: darkblue; font-size: 20px"
+          >Primeiro nome:</label
+        ><br />
+        <input type="text" id="fname" name="fname" value="" /><br />
+        <label for="lname" style="color: darkblue; font-size: 20px"
+          >Último nome:</label
+        ><br />
+        <input type="text" id="lname" name="lname" value="" /><br /><br />
+        <input type="submit" value="Submit"/>
+      </form>
+    </div>
   </body>
 </html>

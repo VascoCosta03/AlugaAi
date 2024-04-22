@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.titulo {
+  border: 2px solid lightgray;
+  border-radius: 10px;
+  background-color: lightgray;
+  padding: 10px;
+}
+
+.strong {
+  font-size: 20px;
+  color: #333;
+}
+
+.imagem {
+  border: 1px;
+  border-radius: 10px;
+  padding-bottom: 30px;
+}
+
+texto-imagem {
+  font-size: 15px;
+  color: #333;
+}
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th,
+td {
+  border: 1px solid #333;
+  padding: 10px;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+td {
+  background-color: turquoise;
+}
+
+.botao-pagina-1 {
+  top: 50%;
+  background-color: teal;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px teal;
+  cursor: pointer;
+}
+
+.botao-pagina-1:hover {
+  background-color: #fff;
+  color: teal;
+  transition: 0.7s;
+}
+
+.botao-pagina-1:active {
+  background-color: yellow;
+}
+
+.header-pagina-2 {
+  background-color: cyan;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 75px;
+}
+
+.botao-pagina-2 {
+  top: 50%;
+  background-color: teal;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px teal;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.botao-pagina-2:hover {
+  background-color: #fff;
+  color: teal;
+  transition: 0.7s;
+}
+
+.botao-pagina-2:active {
+  background-color: yellow;
+}
+
+.forms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.forms form {
+  margin: 0 50px;
+}
+
+.form-nome {
+  margin-top: 10px;
+  display: block;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 25px;
+  background: linear-gradient(to right, #1e90ff, white);
+  color: white;
+  font-size: 20px;
+  transition: background 0.5s;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: linear-gradient(to right, white, #1e90ff);
+}
+
+.botoes-pagina-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.botoes-pagina-3 a {
+  margin: 0 10px;
+}
