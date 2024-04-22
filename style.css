@@ -1,0 +1,87 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #deffdb;
+}
+
+header {
+    background-color: #09642c;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+main {
+    padding: 15px;
+}
+
+main h2 {
+    color: #09642c;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+main img {
+    display: block;
+    margin: 0 auto 20px auto;
+    border: #09642c 5px solid;
+    border-radius: 100px;
+    margin-bottom: 40px;
+}
+
+main p {
+    line-height: 1.5;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: large;
+}
+main p2 {
+    text-align: left;
+    padding: 5px;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+
+main strong {
+    color: #09642c;
+}
+
+main ol {
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+main ol li {
+    padding: 8px 0;
+    border-bottom: 1px solid #09642c;
+    list-style: upper-roman;
+}
+
+nav {
+    list-style-type: none;
+    margin-top: 40px;
+    margin-bottom: 70px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 100px;
+    border: #09642c 5px solid;
+    padding: 8px;
+    text-align: center;
+}
+
+footer {
+    background-color: #09642c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer form {
+    margin-bottom: 10px;
+}
+
+footer input[type="email"] {
+    padding: 8px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

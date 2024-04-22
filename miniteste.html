@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pagina do mini teste</title>
-    </head>
+<head>
+    <style>
+        header{
+            background-color: green;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Pagina do mini teste</title>
+</head>
+<body>
     <header>
-        <h1>Sporting CP</h1>
+        <div style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; text-align: center;">
+            <h1>Sporting CP</h1>
+        </div>
     </header>
     <main>
-        <h2>Página de apoio ao Sporting CP</h2>
-        <img src="https://www.wikisporting.com/images/thumb/0/08/Sporting_Clube_de_Portugal_-_Emblema.png/250px-Sporting_Clube_de_Portugal_-_Emblema.png" alt="">
-        <h3> Resultado da última jornada: </h3>
-        <p>Sporting 4 - 0 Gil Vicente</p>
-        <strong>Golos: Trincão | Pedro | Gyokeres</strong>
-        <p>Melhores jogadores deste jogo:</p>
+        <div>
+            <h2>Página de apoio ao Sporting CP</h2>
+            <img src="https://www.wikisporting.com/images/thumb/0/08/Sporting_Clube_de_Portugal_-_Emblema.png/250px-Sporting_Clube_de_Portugal_-_Emblema.png" alt="">
+            <h3> Resultado da última jornada: </h3>
+            <div>
+                <p2>Sporting 4 - 0 Gil Vicente</p2>
+                <strong>Golos: Trincão | Pedro | Gyokeres</strong>
+            </div>
+            <p>Melhores jogadores deste jogo:</p>
             <ol>
                 <li>Trincão</li>
                 <li>Catamo</li>
                 <li>Gyokeres</li>
             </ol>
-        <br>
-        <nav>
-            <ul>
-                <li><a href="ligaPortugal.html">Mais informações sobre a nossa liga aqui!</a></li>
-            </ul>
-        </nav>
+        </div>
+        <div>
+            <nav>
+                <li><a href="ligaPortugal.html">Mais informações sobre a nossa liga aqui</a></li>
+            </nav>
             <h3>Próxima jornada:</h3>
             <mark>Famalicão vs Sporting CP</mark>
             <button>
                 <a href="https://www.sporting.pt/">Compre os seus bilhetes</a>
             </button>
+        </div>
     </main>
     <footer>
-        <br>
-        <form data = "form">
-            <label for="email">Subscreva a nossa newsletter através do seu email:</label>
-            <input type="email" id="email" name="email" required>
-        </form>
-        <br>
+        <div>
+            <form data="form">
+                <label for="email">Subscreva a nossa newsletter através do seu email:</label>
+                <input type="email" id="email" name="email" required>
+            </form>
+        </div>
     </footer>
+</body>
 </html>
