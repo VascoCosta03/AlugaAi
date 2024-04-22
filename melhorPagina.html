@@ -5,25 +5,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melhor página</title>
-
-    <script>
-        function Verificar(e) {
-            e.preventDefault();
-            clube = document.getElementById("clube").value;
-            if (clube != "3") {
-                alert("Resposta errada!");
-            }
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
         }
-    </script>
+
+        h1 {
+            text-align: center;
+            margin: 15px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 250px;
+        }
+
+        #formulario {
+            background-color: lightgreen;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        #formulario:hover {
+            background-color: greenyellow;
+        }
+
+        #formulario h2 {
+            text-align: center;
+        }
+
+        #formulario input,
+        #formulario textarea {
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        #formulario input[type="submit"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+
+    </style>
 
 </head>
 
 <body>
     <h1>VIVA AO SPORTING</h1>
-    <p>SPORTING 2023/2024</p>
-    <a href="index.html">Voltar</a>
+    <p style="margin-left: 5px; font-size: xx-large; font-weight: bold;">SPORTING 2023/2024</p>
+    <a href="index.html" style="margin-left: 5px;">Voltar</a>
     <br>
-    <div id="formulario">
+    <div id="formulario" style=" margin-top: 10px;">
         <h2>Preencha corretamente o formulário</h2>
         <form>
             <input type="text" name="nome" id="nome" placeholder="Seu nome..."><br>
@@ -41,7 +88,7 @@
             <input type="checkbox" name="bonito" id="bonito">
             <label for="bonito">É bonito?</label>
             <br>
-            <textarea name="notas_particulares" id="notas_particulares" cols="45" rows="10"></textarea>
+            <textarea name="notas_particulares" id="notas_particulares" cols="45" rows="10" ></textarea>
             <br>
             <input type="submit" value="Verificar">
         </form>

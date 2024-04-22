@@ -4,16 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>AlugaAí</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+
+        }
+
+        #listaCompras {
+            background-color: lightblue;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        #listaCompras li {
+            list-style-type: none;
+            font-size: 25px;
+        }
+
+        ol {
+            list-style-type: upper-roman;
+        }
+
+        p {
+            text-align: right;
+            margin-right: 5px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 250px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>MINI TESTE HTML</h1>
-    <p>Todos os direitos reservados a &copy; Rafael Cardoso</p>
+    <h1 style="text-align: center;margin: 15px;">MINI TESTE HTML</h1>
     <img src="https://conhecimentoinovacao.iscte-iul.pt/wp-content/uploads/2021/02/rgb_iscte_pt_horizontal_positive.png"
         alt="Iscte Logo" width="150px">
     <br>
-    <a href="melhorPagina.html">VISITAR O MELHOR SITE</a>
     <div id="praticar">
         <h2>Vamos praticar</h2>
         <ol>
@@ -23,14 +60,17 @@
         </ol>
     </div>
 
-    <div>
+    <div id="listaCompras" style="margin-left: 5px; margin-right: 5px;">
         <h2>Lista de Compras</h2>
         <ul>
             <li><em>Maçãs</em></li>
             <li><em>Peras</em></li>
-            <li></em>Uvas</em></li>
+            <li><em>Uvas</em></li>
         </ul>
     </div>
+    <a class="link" href="melhorPagina.html">VISITAR O MELHOR SITE</a>
+    <p>Todos os direitos reservados a &copy; Rafael Cardoso</p>
+
 </body>
 
 </html>
