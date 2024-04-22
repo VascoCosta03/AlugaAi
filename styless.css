@@ -1,11 +1,10 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
-
 
 header {
     background-color: #333;
@@ -45,10 +44,13 @@ main section h3 {
     color: #666;
 }
 p{
-    color: #333;
+    color: #000000;
     font-size: large;
     text-align: center;
     text-decoration: underline;
+    letter-spacing: 2px;
+    line-height: 200%;
+    font-weight: bold;
 }
 
 main section img {
