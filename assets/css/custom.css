@@ -1,3 +1,3 @@
-/*
-Custom Css
-*/
+.card:hover {
+    cursor: pointer;
+}
