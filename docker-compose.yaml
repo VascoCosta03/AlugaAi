@@ -16,9 +16,9 @@ services:
     server:
       build:
         context: ./server
-        dockerfile: Dockerfile
+        dockerfile: DockerFile
       ports:
-        -80:80
+        - 80:80
       networks:
         - app-network
 
@@ -29,11 +29,11 @@ services:
       volumes:
         - ./app:/app
       networks: 
-        -app-network
+        - app-network
       env_file:
         - ./app/.env
       depends_on:
-        -db
+        - db
       command: [ "gunicorn", "setup.wsgi:application", "-w", "2", "-b", ":8000" ]
     
     db-migrate:
@@ -41,7 +41,7 @@ services:
         context: ./app
         dockerfile: Dockerfile
       volumes:
-          - ./app:/app
+        - ./app:/app
       networks:
         - app-network
       env_file:
@@ -54,8 +54,9 @@ services:
 
 
 networks:
- - app-network:
+  app-network:
     driver: bridge
 
+
 volumes:
-  db-data: {}
+  db_data: {}
