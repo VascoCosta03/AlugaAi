@@ -13,6 +13,9 @@ def index(request):
 def about(request):
     return render(request, 'about.html')
 
+def produto(request):
+    return render(request, 'produto.html')
+
 @login_required(login_url='index')
 def dashboard(request):
     return render(request, 'dashboard.html')
