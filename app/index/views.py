@@ -16,6 +16,9 @@ def about(request):
 def produto(request):
     return render(request, 'produto.html')
 
+def drones(request):
+    return render(request, 'drones.html')
+
 @login_required(login_url='index')
 def dashboard(request):
     return render(request, 'dashboard.html')
