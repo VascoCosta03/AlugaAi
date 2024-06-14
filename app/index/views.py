@@ -9,9 +9,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
-    categorias = Categoria.objects.all()  # Recupera todas as categorias do banco de dados
+    categorias_destaque = Categoria.objects.all().order_by('id_categoria')[:3] 
     context = {
-        'categorias': categorias  # Adiciona as categorias ao contexto
+        'categorias_destaque': categorias_destaque
     }
     return render(request, 'index.html', context)
 
@@ -21,8 +21,8 @@ def about(request):
 def produto(request):
     return render(request, 'produto.html')
 
-def drones(request):
-    return render(request, 'drones.html')
+def produtos(request):
+    return render(request, 'produtos.html')
 
 @login_required(login_url='index')
 def dashboard(request):
