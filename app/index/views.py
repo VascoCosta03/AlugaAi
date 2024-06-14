@@ -1,4 +1,5 @@
 from django.contrib import messages
+from .models import Categoria
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -8,7 +9,11 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    categorias = Categoria.objects.all()  # Recupera todas as categorias do banco de dados
+    context = {
+        'categorias': categorias  # Adiciona as categorias ao contexto
+    }
+    return render(request, 'index.html', context)
 
 def about(request):
     return render(request, 'about.html')

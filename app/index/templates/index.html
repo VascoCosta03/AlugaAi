@@ -89,6 +89,9 @@ Página Inicial do meu Projeto
     <div class="row text-center pt-3">
       <div class="col-lg-6 m-auto">
         <h1 class="fw-normal"><b>Categorias em Destaque</b></h1>
+        {% for categoria in categorias %}
+        <p>{{ categoria.categoria }}</p>
+    {% endfor %}
         <p>
           Estas são as categorias mais procuradas no momento. Aproveite para conferir!
         </p>
