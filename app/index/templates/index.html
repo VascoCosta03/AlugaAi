@@ -1,63 +1,13 @@
 {% extends "base.html" %}
 
-    {% block titulo %}
-    Página Inicial do meu Projeto
-    {% endblock titulo %}
+{% block titulo %}
+Página Inicial do meu Projeto
+{% endblock titulo %}
 
-    {% block conteudo %}
-    <main class="form-signin w-100 m-auto">
-      </main>
-      <!DOCTYPE html>
-<html lang="pt">
-
-<head>
-  <title>Aluga Ai</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <link rel="apple-touch-icon" href="assets/img/apple-icon.png" />
-  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
-
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/templatemo.css" />
-  <link rel="stylesheet" href="assets/css/custom.css" />
-
-  <!-- Load fonts style after rendering the layout styles -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap" />
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
-
-  <!--
-    
-TemplateMo 559 Zay Shop
-
-https://templatemo.com/tm-559-zay-shop
-
--->
-</head>
-
-
-<body class="bg-info">
-  <!-- Modal -->
-  <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="w-100 pt-1 mb-5 text-right">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form action="" method="get" class="modal-content modal-body border-0 p-0">
-        <div class="input-group mb-2">
-          <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ..." />
-          <button type="submit" class="input-group-text bg-success text-light">
-            <i class="fa fa-fw fa-search text-white"></i>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
+{% block conteudo %}
 
   <!-- Start Banner Hero -->
-  <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+  <div id="template-mo-zay-hero-carousel" class="carousel slide container mt-3" data-bs-ride="carousel">
     <ol class="carousel-indicators">
       <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
       <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
@@ -146,18 +96,24 @@ https://templatemo.com/tm-559-zay-shop
     </div>
     <div class="row">
       <div class="col-12 col-md-4 p-5 mt-3">
-        <a href="#"><img src="https://www.mytrendyphone.pt/images/RC-Drone-with-GPS-and-4K-HD-Dual-Camera-F11-20122021-01-p.webp" class="rounded-circle img-fluid border" style="width: 350px; height: 350px;" /></a>
+        <a href="#"><img
+            src="https://www.mytrendyphone.pt/images/RC-Drone-with-GPS-and-4K-HD-Dual-Camera-F11-20122021-01-p.webp"
+            class="rounded-circle img-fluid border" style="width: 350px; height: 350px;" /></a>
         <h5 class="text-center mt-3 mb-3">Drones</h5>
         <p class="text-center"><a class="btn btn-light" href="{% url 'drones' %}">Pesquisar</a></p>
 
       </div>
       <div class="col-12 col-md-4 p-5 mt-3">
-        <a href="#"><img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3bbecbdf584e40398446a8bf0117cf62_9366/Sapatilhas_Samba_OG_Branco_B75806_01_standard.jpg" class="rounded-circle img-fluid border" /></a>
+        <a href="#"><img
+            src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3bbecbdf584e40398446a8bf0117cf62_9366/Sapatilhas_Samba_OG_Branco_B75806_01_standard.jpg"
+            class="rounded-circle img-fluid border" /></a>
         <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
         <p class="text-center"><a class="btn btn-light">Pesquisar</a></p>
       </div>
       <div class="col-12 col-md-4 p-5 mt-3">
-        <a href="#"><img src="https://images.tcdn.com.br/img/img_prod/810719/oculos_de_grau_ray_ban_clubmaster_rx5154_preto_fosco_tamanho_51_1163_1_20210618161447.jpg" class="rounded-circle img-fluid border" /></a>
+        <a href="#"><img
+            src="https://images.tcdn.com.br/img/img_prod/810719/oculos_de_grau_ray_ban_clubmaster_rx5154_preto_fosco_tamanho_51_1163_1_20210618161447.jpg"
+            class="rounded-circle img-fluid border" /></a>
         <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
         <p class="text-center"><a class="btn btn-light">Pesquisar</a></p>
       </div>
@@ -166,7 +122,7 @@ https://templatemo.com/tm-559-zay-shop
   <!-- End Categories -->
 
   <!-- Start  Product -->
-  <section class="bg-info text-white">
+  <section class="bg-info text-white mb-5">
     <div class="container py-5">
       <div class="row text-center py-3">
         <div class="col-lg-6 m-auto">
@@ -179,7 +135,8 @@ https://templatemo.com/tm-559-zay-shop
       <div class="row text-dark">
         <div class="col-12 col-md-4 mb-4">
           <div class="card h-100 card-produto" value="1">
-            <img src="https://cms-files.gds.pt/GDS_images/2023/09/26/1200_800/PT__20230926100907_949100400.jpg" class="card-img-top" alt="..." height="275" />
+            <img src="https://cms-files.gds.pt/GDS_images/2023/09/26/1200_800/PT__20230926100907_949100400.jpg"
+              class="card-img-top" alt="..." height="275" />
             <div class="card-body pb-0">
               <div class="row">
                 <h2 class="h2 text-decoration-none col-10">Bicicleta</h2>
@@ -197,7 +154,8 @@ https://templatemo.com/tm-559-zay-shop
         </div>
         <div class="col-12 col-md-4 mb-4">
           <div class="card h-100 card-produto" value="1">
-            <img src="https://mappa.ag/wp-content/uploads/2021/07/quadcopter-voando-na-natureza_231208-10459.jpg" class="card-img-top" alt="..." height="275"/>
+            <img src="https://mappa.ag/wp-content/uploads/2021/07/quadcopter-voando-na-natureza_231208-10459.jpg"
+              class="card-img-top" alt="..." height="275" />
             <div class="card-body pb-0">
               <div class="row">
                 <h2 class="h2 text-decoration-none col-10">Drone</h2>
@@ -215,7 +173,8 @@ https://templatemo.com/tm-559-zay-shop
         </div>
         <div class="col-12 col-md-4 mb-4">
           <div class="card h-100 card-produto" value="1">
-            <img src="https://cdn.xl.pt/bs/uploads/sites/112/2022/11/45524255-1-1920x1080.jpg" class="card-img-top" alt="..." height="275" />
+            <img src="https://cdn.xl.pt/bs/uploads/sites/112/2022/11/45524255-1-1920x1080.jpg" class="card-img-top"
+              alt="..." height="275" />
             <div class="card-body pb-0">
               <div class="row">
                 <h2 class="h2 text-decoration-none col-10">Raquete de Padel</h2>
@@ -236,34 +195,4 @@ https://templatemo.com/tm-559-zay-shop
   </section>
   <!-- End Product -->
 
-  <!-- Start Footer -->
-  <footer class="bg-dark" id="tempaltemo_footer">
-    <div class="w-100 bg-white py-3">
-      <div class="container">
-        <div class="row pt-2">
-          <div class="col-12">
-            <p class="text-center text-info fw-bold">
-              Copyright &copy;
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              - Aluga Ai
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Start Script -->
-  <script src="assets/js/jquery-1.11.0.min.js"></script>
-  <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/templatemo.js"></script>
-  <script src="assets/js/custom.js"></script>
-  <!-- End Script -->
-</body>
-
-</html>
-      {% endblock conteudo %}
-      
+{% endblock conteudo %}
