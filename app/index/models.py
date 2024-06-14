@@ -22,6 +22,7 @@ class Utilizador(models.Model):
     nome = models.CharField(max_length=255)
     email = models.EmailField()
     password = models.CharField(max_length=255)
+    foto_url = models.CharField(max_length=255, default='null')
     saldo = models.FloatField()
 
     def __str__(self):
@@ -35,11 +36,12 @@ class Anuncio(models.Model):
     )
     
     id_anuncio = models.AutoField(primary_key=True)
-    id_utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
-    id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    id_localizacao = models.ForeignKey(Localizacao, on_delete=models.CASCADE)
+    utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    localizacao = models.ForeignKey(Localizacao, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=255)
     preco = models.FloatField()
+    foto_url = models.CharField(max_length=255, default='null')
     ativo = models.BooleanField()
     estado = models.CharField(max_length=2, choices=ESTADO_CHOICES)
 
