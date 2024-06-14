@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Aluga Ai - Produtos
+{% endblock titulo %}
+
+{% block conteudo %}
+<section class="bg-info pt-3 mb-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-3 mb-5" style="background-color: rgb(232, 249, 255);">
+                <h1 class="font-weight-bold mb-4">Filtros</h1>
+                <ul class="list-unstyled templatemo-accordion">
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Estado do produto
+                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul class="collapse show list-unstyled pl-3">
+                            <li><a class="text-decoration-none" href="#">Novo</a></li>
+                            <li><a class="text-decoration-none" href="#">Semi-novo</a></li>
+                            <li><a class="text-decoration-none" href="#">Usado</a></li>
+                        </ul>
+                    </li>
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Disponibilidade
+                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
+                            <li><a class="text-decoration-none" href="#">Definir</a></li>
+                            <li><a class="text-decoration-none" href="#">Definir</a></li>
+                        </ul>
+                    </li>
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Localização
+                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul class="collapse show list-unstyled pl-3">
+                            {% for localizacao in localizacoes %}
+                            <li><a class="text-decoration-none" href="#">{{ localizacao.localizacao }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Preço
+                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul id="collapseThree" class="collapse list-unstyled pl-3">
+                            <li><a class="text-decoration-none" href="#">Definir</a></li>
+                            <li><a class="text-decoration-none" href="#">Definir</a></li>
+                            <li><a class="text-decoration-none" href="#">Definir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-9"> <!-- Ajuda aqui -->
+                <div class="row">
+                    <form class="form-inline">
+                        <div class="col-11 d-flex">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Bicicleta"
+                                aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <div class="row text-dark">
+                        {% for anuncio in anuncios %}
+                        <div class="col-12 col-md-4 mb-4 h-50">
+                            <div class="card h-50 card-produto" value="1">
+                                <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
+                                <div class="card-body pb-0">
+                                    <div class="row">
+                                        <h6 href="produto.html" class="text-decoration-none col-10">
+                                            {{ anuncio.titulo }}
+                                        </h6>
+                                        <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
+                                    </div>
+                                    <div class="row">
+                                        <p class="fw-bold">{{ anuncio.preco }} €/Dia</p>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <p href="produto.html" class="text-decoration-none col-10">
+                                            {{ anuncio.utilizador.nome}}
+                                        </p>
+                                        <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock conteudo %}

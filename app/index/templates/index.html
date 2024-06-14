@@ -119,63 +119,26 @@ Aluga Ai
       </div>
     </div>
     <div class="row text-dark">
+      {% for anuncio in anuncios_destaque %}
       <div class="col-12 col-md-4 mb-4">
         <div class="card h-100 card-produto" value="1">
-          <img src="https://cms-files.gds.pt/GDS_images/2023/09/26/1200_800/PT__20230926100907_949100400.jpg"
-            class="card-img-top" alt="..." height="275" />
+          <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
           <div class="card-body pb-0">
             <div class="row">
-              <h2 class="h2 text-decoration-none col-10">Bicicleta</h2>
+              <h2 class="h2 text-decoration-none col-10">{{ anuncio.titulo }}</h2>
               <i class=" col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
             </div>
             <div class="row">
-              <p class="fw-bold">15.00 €/Dia</p>
+              <p class="fw-bold">{{ anuncio.preco }} €/Dia</p>
             </div>
             <div class="row mt-5">
-              <p class=" text-decoration-none col-10">João Silva</p>
+              <p class=" text-decoration-none col-10">{{ anuncio.utilizador.nome }}</p>
               <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-4 mb-4">
-        <div class="card h-100 card-produto" value="1">
-          <img src="https://mappa.ag/wp-content/uploads/2021/07/quadcopter-voando-na-natureza_231208-10459.jpg"
-            class="card-img-top" alt="..." height="275" />
-          <div class="card-body pb-0">
-            <div class="row">
-              <h2 class="h2 text-decoration-none col-10">Drone</h2>
-              <i class=" col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
-            </div>
-            <div class="row">
-              <p class="fw-bold">35.00 €/Dia</p>
-            </div>
-            <div class="row mt-5">
-              <p class=" text-decoration-none col-10">Rafael Cardoso</p>
-              <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-4 mb-4">
-        <div class="card h-100 card-produto" value="1">
-          <img src="https://cdn.xl.pt/bs/uploads/sites/112/2022/11/45524255-1-1920x1080.jpg" class="card-img-top"
-            alt="..." height="275" />
-          <div class="card-body pb-0">
-            <div class="row">
-              <h2 class="h2 text-decoration-none col-10">Raquete de Padel</h2>
-              <i class=" col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
-            </div>
-            <div class="row">
-              <p class="fw-bold">5.00 €/Dia</p>
-            </div>
-            <div class="row mt-5">
-              <p class=" text-decoration-none col-10">Vicente Teixeira</p>
-              <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>

@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Categoria
+from .models import Categoria, Anuncio
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -9,9 +9,11 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
-    categorias_destaque = Categoria.objects.all().order_by('id_categoria')[:3] 
+    categorias_destaque = Categoria.objects.all().order_by('id_categoria')[:3]
+    anuncios_destaque = Anuncio.objects.all().filter(ativo=True).order_by('id_anuncio')[:3]
     context = {
-        'categorias_destaque': categorias_destaque
+        'categorias_destaque': categorias_destaque,
+        'anuncios_destaque': anuncios_destaque
     }
     return render(request, 'index.html', context)
 
@@ -22,7 +24,13 @@ def produto(request):
     return render(request, 'produto.html')
 
 def produtos(request):
-    return render(request, 'produtos.html')
+    categorias = Categoria.objects.all().order_by('id_categoria')
+    anuncios = Anuncio.objects.all().filter(ativo=True).order_by('id_anuncio')
+    context = {
+        'categorias': categorias,
+        'anuncios': anuncios
+    }
+    return render(request, 'produtos.html', context)
 
 @login_required(login_url='index')
 def dashboard(request):
