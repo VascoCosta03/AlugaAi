@@ -10,6 +10,9 @@ class Categoria(models.Model):
     def __str__(self):
         return self.categoria
     
+    def get_anuncio_count(self):
+        return Anuncio.objects.filter(categoria=self).count()
+    
 class Localizacao(models.Model):
     id_localizacao = models.AutoField(primary_key=True)
     localizacao = models.CharField(max_length=255)
@@ -27,6 +30,9 @@ class Utilizador(models.Model):
 
     def __str__(self):
         return self.nome
+    
+    def get_anuncio_count(self):
+        return Anuncio.objects.filter(utilizador=self).count()
     
 class Anuncio(models.Model):
     ESTADO_CHOICES = (
@@ -47,4 +53,50 @@ class Anuncio(models.Model):
     descricao = models.TextField(default='null')
 
     def __str__(self):
-        return self.nome
+        return self.titulo
+    
+    def get_favorite_count(self):
+        return Favorito.objects.filter(anuncio=self).count()
+    
+    def get_aluguer_count(self):
+        return ProdutoAlugado.objects.filter(anuncio=self).count()
+    
+class Favorito(models.Model):
+    id_favorito = models.AutoField(primary_key=True)
+    anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE)
+    utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.id_favorito
+    
+class ProdutoAlugado(models.Model):
+    
+    id_produto_alugado = models.AutoField(primary_key=True)
+    utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE)
+    data_inicio = models.DateField()
+    data_fim = models.DateField()
+    preco_total = models.FloatField()
+
+    def __str__(self):
+        return self.anuncio.titulo
+    
+class Chat(models.Model):
+    id_chat = models.AutoField(primary_key=True)
+    utilizador1 = models.ForeignKey(Utilizador, on_delete=models.CASCADE, related_name='chats_started')  # New related_name
+    utilizador2 = models.ForeignKey(Utilizador, on_delete=models.CASCADE, related_name='chats_participating')  # New related_name
+
+
+
+    def __str__(self):
+        return self.id_chat
+    
+class Mensagem(models.Model):
+    id_mensagem = models.AutoField(primary_key=True)
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    remetente = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    mensagem = models.TextField()
+    data = models.DateTimeField()
+
+    def __str__(self):
+        return self.mensagem

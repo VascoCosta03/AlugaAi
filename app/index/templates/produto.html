@@ -34,20 +34,20 @@ Página Produto
                                 <div class="row">
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" />
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" />
                                         </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" />
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" />
                                         </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" />
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" />
                                         </a>
                                     </div>
                                 </div>
@@ -59,18 +59,18 @@ Página Produto
                                 <div class="row">
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" /> </a>
                                     </div>
                                 </div>
                             </div>
@@ -81,18 +81,18 @@ Página Produto
                                 <div class="row">
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}"
-                                                class="card-img-top" alt="..." height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
+                                                height="150" /> </a>
                                     </div>
                                 </div>
                             </div>
@@ -120,11 +120,12 @@ Página Produto
                             <li class="list-inline-item">
                                 <h4 class="text-secondary"><strong style="color: black;">Preço:</strong></h4>
                             </li>
-                            <li class="list-inline-item h4 text-success">{{anuncio.preco}}€ /Dia</li>
+                            <li class="list-inline-item h4 text-success">{{anuncio.preco}}€ /Dia </li>
                         </ul>
                         <p class="py-2">
-                            <span class="list-inline-item text-dark">Favoritos: <strong>49</strong> | Comentários:
-                                <strong>36</strong></span>
+                            <span class="list-inline-item text-dark">Favoritos: <strong>{{ anuncio.get_favorite_count
+                                    }}</strong> <!--| Comentários:
+                                <strong>36</strong></span>-->
                         </p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
@@ -146,18 +147,19 @@ Página Produto
                         <h5 class="text-secondary"><strong style="color: black;">Descrição:</strong></h5>
                         <p>{{ anuncio.descricao }}</p>
 
-
-                        <h5 class="text-secondary"><strong style="color: black;">Especificações:</strong></h5>
-                        <ul class="list-unstyled pb-3">
-                            <li><i class="fa fa-check text-success"></i> Quadro de alumínio resistente</li>
-                            <li><i class="fa fa-check text-success"></i> Suspensão dianteira para maior conforto</li>
-                            <li><i class="fa fa-check text-success"></i> Freios a disco para uma parada segura</li>
-                            <li><i class="fa fa-check text-success"></i> 21 velocidades para enfrentar qualquer terreno
-                            </li>
-                            <li><i class="fa fa-check text-success"></i> Pneus largos para melhor aderência</li>
-                            <li><i class="fa fa-check text-success"></i> Assento ajustável para maior conforto</li>
-                            <li><i class="fa fa-check text-success"></i> Peso máximo do ciclista: 120 kg</li>
-                        </ul>
+                        <!--
+    <h5 class="text-secondary"><strong style="color: black;">Especificações:</strong></h5>
+    <ul class="list-unstyled pb-3">
+        <li><i class="fa fa-check text-success"></i> Quadro de alumínio resistente</li>
+        <li><i class="fa fa-check text-success"></i> Suspensão dianteira para maior conforto</li>
+        <li><i class="fa fa-check text-success"></i> Freios a disco para uma parada segura</li>
+        <li><i class="fa fa-check text-success"></i> 21 velocidades para enfrentar qualquer terreno
+        </li>
+        <li><i class="fa fa-check text-success"></i> Pneus largos para melhor aderência</li>
+        <li><i class="fa fa-check text-success"></i> Assento ajustável para maior conforto</li>
+        <li><i class="fa fa-check text-success"></i> Peso máximo do ciclista: 120 kg</li>
+    </ul>
+    -->
 
                         <div class="row pb-3">
                             <div class="col d-grid">
