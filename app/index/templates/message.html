@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Message
+{% endblock titulo %}
+{% block conteudo %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #00bcd4;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            height: 80%;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 30%;
+            background-color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .sidebar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .sidebar div {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .chat {
+            width: 70%;
+            background-color: #b2ebf2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .messages {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .message {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .message img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .message-text {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .message img.bike {
+            width: 200px;
+            height: auto;
+            border-radius: 0;
+        }
+        .chat-input {
+            display: flex;
+            align-items: center;
+        }
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .chat-input button {
+            background-color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img src="path/to/paulo1.jpg" alt="Paulo">
+            <div>PAULO<br>12H</div>
+            <img src="path/to/paulo2.jpg" alt="Paulo">
+            <div>PAULO<br>12H</div>
+            <img src="path/to/paulo3.jpg" alt="Paulo">
+            <div>PAULO<br>12H</div>
+        </div>
+        <div class="chat">
+            <div class="chat-header">
+                <h2>NOME_DO_UTILIZADOR</h2>
+            </div>
+            <div class="messages">
+                <div class="message">
+                    <img src="path/to/paulo1.jpg" alt="Paulo">
+                    <div class="message-text">BOM DIA</div>
+                </div>
+                <div class="message">
+                    <img src="path/to/paulo1.jpg" alt="Paulo">
+                    <div class="message-text">TÁ EM PÉ</div>
+                </div>
+                <div class="message">
+                    <img src="path/to/paulo1.jpg" alt="Paulo">
+                    <div class="message-text">MOSTRA!</div>
+                </div>
+                <div class="message">
+                    <img src="path/to/bike.jpg" alt="Bike" class="bike">
+                </div>
+            </div>
+            <div class="chat-input">
+                <button>+</button>
+                <input type="text" placeholder="Type a message...">
+                <button>📷</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock conteudo %}

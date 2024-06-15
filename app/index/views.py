@@ -23,6 +23,9 @@ def about(request):
 def produto(request):
     return render(request, 'produto.html')
 
+def message(request):
+    return render(request, 'message.html')
+
 def produtos(request):
     categorias = Categoria.objects.all().order_by('id_categoria')
     anuncios = Anuncio.objects.all().filter(ativo=True).order_by('id_anuncio')
