@@ -13,4 +13,5 @@ urlpatterns = [
     path('deslogar_usuario/', deslogar_usuario, name='deslogar_usuario'),
     path('produtos/', produtos, name='produtos'),
     path('about/', about, name='about'),
+    path('message/', message, name='message'),
 ]
