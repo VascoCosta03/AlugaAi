@@ -30,9 +30,9 @@ class Utilizador(models.Model):
     
 class Anuncio(models.Model):
     ESTADO_CHOICES = (
-        ("N", "Novo"),
-        ("SN", "Semi-novo"),
-        ("U", "Usado"),
+        ("Novo", "Novo"),
+        ("Semi-novo", "Semi-novo"),
+        ("Usado", "Usado"),
     )
     
     id_anuncio = models.AutoField(primary_key=True)
@@ -43,7 +43,8 @@ class Anuncio(models.Model):
     preco = models.FloatField()
     foto_url = models.CharField(max_length=255, default='null')
     ativo = models.BooleanField()
-    estado = models.CharField(max_length=2, choices=ESTADO_CHOICES)
+    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES)
+    descricao = models.TextField(default='null')
 
     def __str__(self):
         return self.nome

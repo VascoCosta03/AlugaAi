@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Categoria, Anuncio
+from .models import Categoria, Anuncio, Localizacao
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -20,17 +20,23 @@ def index(request):
 def about(request):
     return render(request, 'about.html')
 
-def produto(request):
-    return render(request, 'produto.html')
-
 def message(request):
     return render(request, 'message.html')
 
+def adicionar(request):
+    return render(request, 'message.html')
+
+def produto(request, id):
+    anuncio = Anuncio.objects.get(id_anuncio=id)
+    return render(request, 'produto.html', {'anuncio': anuncio})
+
 def produtos(request):
     categorias = Categoria.objects.all().order_by('id_categoria')
+    localizacoes = Localizacao.objects.all().order_by('id_localizacao')
     anuncios = Anuncio.objects.all().filter(ativo=True).order_by('id_anuncio')
     context = {
         'categorias': categorias,
+        'localizacoes': localizacoes,
         'anuncios': anuncios
     }
     return render(request, 'produtos.html', context)
