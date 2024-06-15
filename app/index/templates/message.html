@@ -9,34 +9,17 @@ Message
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message</title>
+    <title>Página de Mensagens</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #00bcd4;
-        }
         .container {
-            display: flex;
-            width: 80%;
-            height: 80%;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            max-width: 1200px;
         }
         .sidebar {
-            width: 30%;
-            background-color: #e0e0e0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-right: 1px solid #ddd;
         }
         .sidebar img {
             width: 50px;
@@ -44,28 +27,14 @@ Message
             border-radius: 50%;
             margin-bottom: 10px;
         }
-        .sidebar div {
-            margin-bottom: 10px;
-            text-align: center;
+        .sidebar-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .chat {
-            width: 70%;
-            background-color: #b2ebf2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
             padding: 20px;
-        }
-        .chat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .messages {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            background-color: #b2ebf2;
         }
         .message {
             margin-bottom: 10px;
@@ -91,6 +60,9 @@ Message
         .chat-input {
             display: flex;
             align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 20px;
         }
         .chat-input input {
             flex-grow: 1;
@@ -100,7 +72,7 @@ Message
             margin-right: 10px;
         }
         .chat-input button {
-            background-color: #fff;
+            background-color: #007bff;
             border: none;
             border-radius: 50%;
             width: 40px;
@@ -108,48 +80,82 @@ Message
             display: flex;
             justify-content: center;
             align-items: center;
+            color: #fff;
             cursor: pointer;
+        }
+        .conversas-header {
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <img src="path/to/paulo1.jpg" alt="Paulo">
-            <div>PAULO<br>12H</div>
-            <img src="path/to/paulo2.jpg" alt="Paulo">
-            <div>PAULO<br>12H</div>
-            <img src="path/to/paulo3.jpg" alt="Paulo">
-            <div>PAULO<br>12H</div>
+
+<!-- Start Section -->
+<section class="container py-5">
+    <div class="row">
+        <div class="col-md-4 sidebar">
+            <div class="coversas-header mb-3 text-center">
+                <h2 class="mb-0">Conversas</h2>
+            </div>
+            <div class="sidebar-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
+                <div class="sidebar-text text-center">
+                    <div>PAULO</div>
+                    <div>12H</div>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="João">
+                <div class="sidebar-text">
+                    <div>João</div>
+                    <div>14H</div>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="João">
+                <div class="sidebar-text">
+                    <div>João</div>
+                    <div>24H</div>
+                </div>
+            </div>
         </div>
-        <div class="chat">
-            <div class="chat-header">
-                <h2>NOME_DO_UTILIZADOR</h2>
+        <div class="col-md-8 chat">
+            <div class="chat-header mb-3 text-center">
+                <h2 class="mb-0">NOME_DO_UTILIZADOR</h2>
             </div>
             <div class="messages">
                 <div class="message">
-                    <img src="path/to/paulo1.jpg" alt="Paulo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
                     <div class="message-text">BOM DIA</div>
                 </div>
                 <div class="message">
-                    <img src="path/to/paulo1.jpg" alt="Paulo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
                     <div class="message-text">TÁ EM PÉ</div>
                 </div>
                 <div class="message">
-                    <img src="path/to/paulo1.jpg" alt="Paulo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
                     <div class="message-text">MOSTRA!</div>
                 </div>
                 <div class="message">
                     <img src="path/to/bike.jpg" alt="Bike" class="bike">
                 </div>
             </div>
-            <div class="chat-input">
-                <button>+</button>
+            <div class="chat-input mt-3">
+                <button><i class="fas fa-plus"></i></button>
                 <input type="text" placeholder="Type a message...">
-                <button>📷</button>
+                <button><i class="fas fa-camera"></i></button>
             </div>
         </div>
     </div>
+</section>
+<!-- End Section -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 {% endblock conteudo %}
