@@ -61,6 +61,11 @@ class Anuncio(models.Model):
     def get_aluguer_count(self):
         return ProdutoAlugado.objects.filter(anuncio=self).count()
     
+    def get_color(self):
+        if Favorito.objects.filter(anuncio=self, utilizador=1).count() > 0:
+            return "text-danger"
+        return "text-muted"
+    
 class Favorito(models.Model):
     id_favorito = models.AutoField(primary_key=True)
     anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE)
@@ -73,7 +78,7 @@ class ProdutoAlugado(models.Model):
     
     id_produto_alugado = models.AutoField(primary_key=True)
     utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
-    anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE)
+    anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE, related_name='produtoalugado')
     data_inicio = models.DateField()
     data_fim = models.DateField()
     preco_total = models.FloatField()
