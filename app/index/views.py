@@ -26,6 +26,9 @@ def message(request):
 def adicionar(request):
     return render(request, 'message.html')
 
+def adicionar(request):
+    return render(request, 'anuncie.html')
+
 def produto(request, id):
     anuncio = Anuncio.objects.get(id_anuncio=id)
     return render(request, 'produto.html', {'anuncio': anuncio})
