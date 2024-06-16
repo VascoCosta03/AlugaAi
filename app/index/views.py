@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Categoria, Anuncio, Localizacao
+from .models import Categoria, Anuncio, Localizacao, Utilizador
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -20,9 +20,11 @@ def index(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required(login_url='logar_usuario')
 def message(request):
     return render(request, 'message.html')
 
+@login_required(login_url='logar_usuario')
 def adicionar(request):
     return render(request, 'message.html')
 
@@ -41,10 +43,6 @@ def produtos(request):
     }
     return render(request, 'produtos.html', context)
 
-@login_required(login_url='index')
-def dashboard(request):
-    return render(request, 'dashboard.html')
-
 
 def cadastrar_usuario(request):
     if request.method == "POST":
@@ -59,15 +57,18 @@ def cadastrar_usuario(request):
 
 def logar_usuario(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        usuario = authenticate(request, username=username, password=password)
-        if usuario is not None:
-            login(request, usuario)
-            return redirect('dashboard')
+        form_login = AuthenticationForm(request, data=request.POST)
+        if form_login.is_valid():
+            username = form_login.cleaned_data.get('username')
+            password = form_login.cleaned_data.get('password')
+            usuario = authenticate(request, username=username, password=password)
+            if usuario is not None:
+                login(request, usuario)
+                return redirect('index')
+            else:
+                messages.error(request, "Usuário ou senha inválidos")
         else:
-            messages.error(request, 'As credenciais estão incorretas')
-            return redirect('index')
+            messages.error(request, "Usuário ou senha inválidos")
     else:
         form_login = AuthenticationForm()
     return render(request, 'usuarios/login.html', {"form_login": form_login})
