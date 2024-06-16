@@ -6,7 +6,9 @@
 
 {% block conteudo %}
 
-    <h1>Acesso Restrito</h1>
+    <div class="text-center">
+        <h1>Acesso Restrito</h1>
+    </div>
     <form method="post">
         {% csrf_token %}
         {% for message in messages %}
@@ -15,7 +17,7 @@
             </div>
         {% endfor %}
         <div class="form-group">
-            <label>Nome de usuário: </label>
+            <label>Nome do utilizador: </label>
             {{form_login.username}}
         </div>
 
@@ -24,7 +26,7 @@
             {{form_login.password}}
         </div>
 
-        <div class="form-group">
+        <div class="form-group-bt">
             <input type="submit" class="btn btn-primary" value="Entrar">
         </div>
     </form>
