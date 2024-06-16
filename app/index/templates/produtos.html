@@ -9,7 +9,20 @@ Aluga Ai - Produtos
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-3 mb-5" style="background-color: rgb(232, 249, 255);">
-                <h1 class="font-weight-bold mb-4">Filtros</h1>
+                <h1 class="font-weight-bold mb-2">Filtros</h1>
+                <div class="container mb-2 row text-white">
+                    {% for filtro_nome, filtro_valor in filtros.items %}
+                    <div class="col-12 mb-1 text-white">
+                        <button class="rounded bg-primary btn text-white" onclick="removerFiltro('{{filtro_nome}}')">
+                            {% if filtro_valor|length > 20 %}
+                            {{ filtro_valor|slice:":20" }}...
+                            {% else %}
+                            {{ filtro_valor }}
+                            {% endif %}
+                            <i class="fa fa-close"></i></button>
+                    </div>
+                    {% endfor %}
+                </div>
                 <ul class="list-unstyled templatemo-accordion">
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
@@ -24,12 +37,15 @@ Aluga Ai - Produtos
                     </li>
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Disponibilidade
+                            Categoria
                             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Definir</a></li>
-                            <li><a class="text-decoration-none" href="#">Definir</a></li>
+                            {% for categoria in categorias %}
+                            <li><a class="text-decoration-none" href="#"
+                                    onclick="addFiltro('categoria', {{ categoria.id_categoria }})">
+                                    {{ categoria.categoria }}</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
                     <li class="pb-3">
@@ -39,7 +55,9 @@ Aluga Ai - Produtos
                         </a>
                         <ul class="collapse show list-unstyled pl-3">
                             {% for localizacao in localizacoes %}
-                            <li><a class="text-decoration-none" href="#">{{ localizacao.localizacao }}</a></li>
+                            <li><a class="text-decoration-none" href="#"
+                                    onclick="addFiltro('localizacao', {{ localizacao.id_localizacao }})">
+                                    {{ localizacao.localizacao }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>
@@ -72,29 +90,27 @@ Aluga Ai - Produtos
                     <div class="row text-dark">
                         {% for anuncio in anuncios %}
                         <div class="col-12 col-md-4 mb-4 h-50">
-                            <div class="card h-50 card-produto" value="1">
-                                <a href="{% url 'produto' anuncio.id_anuncio %}" style="text-decoration: none;">
-
-                                    <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
-                                    <div class="card-body pb-0">
-                                        <div class="row">
-                                            <h6 class="text-decoration-none col-10">
-                                                {{ anuncio.titulo }}
-                                            </h6>
-                                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
-                                        </div>
-                                        <div class="row">
-                                            <p class="fw-bold">{{ anuncio.preco }} €/Dia</p>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <p class="text-decoration-none col-10">
-                                                {{ anuncio.utilizador.nome}}
-                                            </p>
-                                            <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
-                                        </div>
+                            <div class="card h-50 card-produto produto-{{ anuncio.id_anuncio }}"
+                                onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
+                                <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
+                                <div class="card-body pb-0">
+                                    <div class="row">
+                                        <h6 class="text-decoration-none col-10">
+                                            {{ anuncio.titulo }}
+                                        </h6>
+                                        <i class="col-2 fa fa-heart mt-2 fa-lg {{ anuncio.get_color }}"
+                                            onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
                                     </div>
-                                </a>
-
+                                    <div class="row">
+                                        <p class="fw-bold">{{ anuncio.preco|floatformat:2 }} €/Dia</p>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <p class="text-decoration-none col-10">
+                                            {{ anuncio.utilizador.nome }}
+                                        </p>
+                                        <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {% endfor %}
@@ -103,4 +119,5 @@ Aluga Ai - Produtos
             </div>
         </div>
 </section>
+
 {% endblock conteudo %}
