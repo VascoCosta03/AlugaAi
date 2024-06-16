@@ -122,20 +122,22 @@ Aluga Ai
       {% for anuncio in anuncios_destaque %}
       <div class="col-12 col-md-4 mb-4">
         <div class="card h-100 card-produto" value="1">
-          <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
-          <div class="card-body pb-0">
-            <div class="row">
-              <h2 class="h2 text-decoration-none col-10">{{ anuncio.titulo }}</h2>
-              <i class=" col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
+          <a href="{% url 'produto' anuncio.id_anuncio %}" style="text-decoration: none;">
+            <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
+            <div class="card-body pb-0">
+              <div class="row">
+                <h2 class="h2 text-decoration-none col-10">{{ anuncio.titulo }}</h2>
+                <i class=" col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
+              </div>
+              <div class="row">
+                <p class="fw-bold">{{ anuncio.preco }} €/Dia</p>
+              </div>
+              <div class="row mt-5">
+                <p class=" text-decoration-none col-10">{{ anuncio.utilizador.nome }}</p>
+                <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
+              </div>
             </div>
-            <div class="row">
-              <p class="fw-bold">{{ anuncio.preco }} €/Dia</p>
-            </div>
-            <div class="row mt-5">
-              <p class=" text-decoration-none col-10">{{ anuncio.utilizador.nome }}</p>
-              <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
       {% endfor %}
