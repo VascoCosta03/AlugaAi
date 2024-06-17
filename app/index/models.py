@@ -66,7 +66,6 @@ class ProdutoAlugado(models.Model):
     anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE, related_name='produtoalugado')
     data_inicio = models.DateField()
     data_fim = models.DateField()
-    preco_total = models.FloatField()
 
     def __str__(self):
         return self.anuncio.titulo
@@ -75,8 +74,6 @@ class Chat(models.Model):
     id_chat = models.AutoField(primary_key=True)
     utilizador1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_started')  # New related_name
     utilizador2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_participating')  # New related_name
-
-
 
     def __str__(self):
         return self.id_chat
