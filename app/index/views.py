@@ -178,9 +178,6 @@ def deslogar_usuario(request):
     return redirect('index')
 
 def adicionar(request):
-    categorias = Categoria.objects.all().order_by('id_categoria')
-    localizacoes = Localizacao.objects.all().order_by('id_localizacao')
-
     if request.method == 'POST':
         categoria_id = request.POST.get('categoria')
         localizacao_id = request.POST.get('localizacao')
@@ -188,31 +185,56 @@ def adicionar(request):
         descricao = request.POST.get('descricao')
         link = request.POST.get('link')
 
+        # Verificar se todos os campos necessários foram preenchidos
+        if not (categoria_id and localizacao_id and preco and descricao):
+            messages.error(request, 'Todos os campos devem ser preenchidos.')
+            return render(request, 'index.html')
+
         try:
+            # Verificar se a categoria e a localização existem
             categoria = Categoria.objects.get(id_categoria=categoria_id)
             localizacao = Localizacao.objects.get(id_localizacao=localizacao_id)
+            utilizador = request.user
 
-            anuncio = Anuncio(
-                categoria=categoria,
-                localizacao=localizacao,
-                preco=preco,
-                descricao=descricao,
-                link=link,
-                utilizador_id=1,  # Usar um valor padrão temporário para utilizador_id
-                titulo="Título Temporário"  # Adicionar título temporário
+            # Criar ou obter o anúncio
+            anuncio, created = Anuncio.objects.get_or_create(
+                utilizador=utilizador, 
+                categoria=categoria, 
+                localizacao=localizacao, 
+                titulo="teste",
+                preco=preco, 
+                foto_url=link, 
+                descricao=descricao, 
             )
-            anuncio.save()
-            messages.success(request, 'Anúncio criado com sucesso!')
-            return redirect('index')
+
+            # Redirecionar para a página inicial após a criação do anúncio
+            
+            
+            produtos_relacionados = Anuncio.objects.filter(categoria=categoria).exclude(id_anuncio=anuncio.id_anuncio).order_by('id_anuncio')[:4]
+    
+            context = {
+                'anuncio': anuncio,
+                'produtos_relacionados': produtos_relacionados
+            }
+            return render(request, 'produto.html', context)
+
         except Categoria.DoesNotExist:
-            messages.error(request, 'Categoria não encontrada.')
+            return render(request, 'message.html')
         except Localizacao.DoesNotExist:
-            messages.error(request, 'Localização não encontrada.')
-        except IntegrityError as e:
-            messages.error(request, f'Erro ao criar anúncio: {e}')
- 
-    context = {
-        'categorias': categorias,
-        'localizacoes': localizacoes
-    }
-    return render(request, 'anuncie.html', context)
+            return render(request, 'produtos.html')
+        except Exception as e:
+            # Adicionar log de erro para identificar problemas
+            return render(request, 'produto.html')
+            print(f"Erro ao criar anúncio: {e}")
+
+        return render(request, 'index.html')
+
+    else:
+        # Obter todas as categorias e localizações para preencher o formulário
+        categorias = Categoria.objects.all().order_by('id_categoria')
+        localizacoes = Localizacao.objects.all().order_by('id_localizacao')
+        context = {
+            'categorias': categorias,
+            'localizacoes': localizacoes
+        }
+        return render(request, 'anuncie.html', context)
