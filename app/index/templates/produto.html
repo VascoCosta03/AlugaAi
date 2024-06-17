@@ -123,8 +123,11 @@ Página Produto
                             <li class="list-inline-item h4 text-success">{{anuncio.preco}}€ /Dia </li>
                         </ul>
                         <p class="py-2">
-                            <span class="list-inline-item text-dark">Favoritos: <strong>{{ anuncio.get_favorite_count}}</strong> <!--| Comentários:
-                                <strong>36</strong></span>-->
+                            <span class="list-inline-item text-dark">Favoritos:
+                                <strong>
+                                    {{anuncio.get_favorite_count}}
+                                </strong>
+                            </span>
                         </p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
@@ -187,78 +190,42 @@ Página Produto
         <!--------------------------------------------------------------------------------------------------------------->
         <!-- Start Carousel Wrapper -->
         <div class="row">
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100 card-produto" value="1">
-                    <img src="https://www.worten.pt/i/66d67398e0e60aa6b6e2e2271173b72cf2aa2876.jpg" class="card-img-top"
-                        alt="..." height="275" />
+            {% for anuncio in produtos_relacionados %}
+            <div class="col-12 col-md-4 mb-4 h-50">
+                <div class="card h-50 card-produto produto-{{ anuncio.id_anuncio }}"
+                    onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
+                    <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
                     <div class="card-body pb-0">
                         <div class="row">
-                            <h2 class="h2 text-decoration-none col-10">Bicicleta Nova</h2>
-                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
+                            <h6 class="text-decoration-none col-10">
+                                {{ anuncio.titulo }}
+                            </h6>
+                            {% if request.user.is_authenticated %}
+                            {% if anuncio.id_anuncio in favoritos %}
+                            <i class="col-2 fa fa-heart mt-2 fa-lg text-danger"
+                                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                            {% else %}
+                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
+                                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                            {% endif %}
+                            {% else %}
+                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
+                                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                            {% endif %}
                         </div>
                         <div class="row">
-                            <p class="fw-bold">35.00 €/Dia</p>
+                            <p class="fw-bold">{{ anuncio.preco|floatformat:2 }} €/Dia</p>
                         </div>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
                         <div class="row mt-5">
-                            <p class=" text-decoration-none col-10">João Silvestre</p>
+                            <p class="text-decoration-none col-10">
+                                {{ anuncio.utilizador.first_name }}
+                            </p>
                             <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100 card-produto" value="1">
-                    <img src="https://imfixies.pt/3247-medium_default/bicicleta-de-pista-krn-track-carbono-5disc-preto.jpg"
-                        class="card-img-top" alt="..." height="275" />
-                    <div class="card-body pb-0">
-                        <div class="row">
-                            <h2 class="h2 text-decoration-none col-10">Bicicleta Pista</h2>
-                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
-                        </div>
-                        <div class="row">
-                            <p class="fw-bold">40.00 €/Dia</p>
-                        </div>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <div class="row mt-5">
-                            <p class=" text-decoration-none col-10">Pedro Santos</p>
-                            <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card h-100 card-produto" value="1">
-                    <img src="https://resize.sprintercdn.com/f/512x512/products/7fe1d9a8-7a29-49cd-8e34-61b9377d8b88/bicicleta-16-pulgadas-sirena-5-7-a-os_7fe1d9a8-7a29-49cd-8e34-61b9377d8b88_3_2130667810.jpg"
-                        class="card-img-top" alt="..." height="275" />
-                    <div class="card-body pb-0">
-                        <div class="row">
-                            <h2 class="h2 text-decoration-none col-10">BMX</h2>
-                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"></i>
-                        </div>
-                        <div class="row">
-                            <p class="fw-bold">25.00 €/Dia</p>
-                        </div>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-warning fa fa-star"></i>
-                        <i class="text-muted fa fa-star"></i>
-                        <div class="row mt-5">
-                            <p class=" text-decoration-none col-10">Rafael Cardoso</p>
-                            <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <!-- End Carousel Wrapper -->
 
