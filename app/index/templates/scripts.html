@@ -85,7 +85,7 @@
         else if (url_atual.indexOf(guid) == -1)
             var novo_url = url_atual + '&' + guid + '=' + value;
         else
-            var novo_url = url_atual.replace(new RegExp(guid + '=\\d+'), guid + '=' + value);
+            var novo_url = url_atual.replace(new RegExp(guid + '=([^&]*)'), guid + '=' + value);
 
         window.location.href = novo_url;
     }
@@ -103,6 +103,11 @@
 
     $(document).ready(function () {
 
+        $('#produto_search_btn').on('click', function (e) {
+            e.preventDefault();
+            var search = $('#produto_search').val();
+            addFiltro('search', search);
+        });
         // Accordion
         var all_panels = $('.templatemo-accordion > li > ul').hide();
 

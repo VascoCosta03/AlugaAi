@@ -30,9 +30,12 @@ Aluga Ai - Produtos
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('estado', '1')">Novo</a></li>
-                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('estado', '2')">Semi-novo</a></li>
-                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('estado', '3')">Usado</a></li>
+                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('estado', '1')">Novo</a>
+                            </li>
+                            <li><a class="text-decoration-none" href="#"
+                                    onclick="addFiltro('estado', '2')">Semi-novo</a></li>
+                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('estado', '3')">Usado</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="pb-3">
@@ -67,9 +70,15 @@ Aluga Ai - Produtos
                             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Definir</a></li>
-                            <li><a class="text-decoration-none" href="#">Definir</a></li>
-                            <li><a class="text-decoration-none" href="#">Definir</a></li>
+                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('preco', '1')">
+                                    &le; 5€</a>
+                            </li>
+                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('preco', '2')">
+                                    &gt; 5€ e &lt; 20</a>
+                            </li>
+                            <li><a class="text-decoration-none" href="#" onclick="addFiltro('preco', '3')">
+                                    &ge; 20€</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -79,9 +88,9 @@ Aluga Ai - Produtos
                 <div class="row mb-2">
                     <form class="form-inline">
                         <div class="col-11 d-flex">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Bicicleta"
+                            <input class="form-control mr-sm-2" id="produto_search" type="search" placeholder="Pesquisar"
                                 aria-label="Search">
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id="produto_search_btn">Pesquisar</button>
                         </div>
                     </form>
                 </div>

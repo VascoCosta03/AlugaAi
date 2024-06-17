@@ -120,7 +120,7 @@ Aluga Ai
     </div>
     <div class="row text-dark">
       {% for anuncio in anuncios_destaque %}
-      <div class="col-12 col-md-4 mb-4 h-50">
+      <div class="col-12 col-md-3 mb-4 h-50">
         <div class="card h-50 card-produto produto-{{ anuncio.id_anuncio }}"
             onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
             <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />

@@ -12,15 +12,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Create your views here.
-
 def index(request):
     categorias_destaque = Categoria.objects.annotate(anuncio_count=Count('anuncio')).order_by('-anuncio_count')[:3]
-    #anuncios_destaque = Anuncio.objects.all().filter(ativo=True).order_by('id_anuncio')[:3]
-    anuncios_destaque = Anuncio.objects.annotate(alugado_count=Count('produtoalugado')).order_by('-alugado_count')[:3]
+    anuncios_destaque = Anuncio.objects.annotate(alugado_count=Count('produtoalugado')).order_by('-alugado_count')[:4]
+    ids_favoritos = {}
+    
+    if request.user.is_authenticated:
+        favoritos = Favorito.objects.filter(utilizador=request.user)
+        ids_favoritos = favoritos.values_list('anuncio_id', flat=True)
+        
     context = {
         'categorias_destaque': categorias_destaque,
-        'anuncios_destaque': anuncios_destaque
+        'anuncios_destaque': anuncios_destaque,
+        'favoritos': ids_favoritos
     }
     return render(request, 'index.html', context)
 
@@ -72,6 +76,24 @@ def produtos(request):
             
         anuncios = anuncios.filter(estado=estado).order_by('id_anuncio')
         filters['estado'] = str(estado)
+    
+    preco_id = request.GET.get('preco')
+    if preco_id:
+        
+        if preco_id == '1':
+            anuncios = anuncios.filter(preco__lte=5).order_by('id_anuncio')
+            filters['preco'] = "Até 5€"
+        elif preco_id == '2':
+            anuncios = anuncios.filter(preco__range=(5, 20)).order_by('id_anuncio')
+            filters['preco'] = "5€ a 20€"
+        else:
+            anuncios = anuncios.filter(preco__gte=20).order_by('id_anuncio')
+            filters['preco'] = "Acima de 20€"
+            
+    search = request.GET.get('search')
+    if search:
+        anuncios = anuncios.filter(titulo__icontains=search).order_by('id_anuncio')
+        filters['search'] = search
         
     context = {
         'categorias': categorias,
