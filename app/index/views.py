@@ -82,6 +82,11 @@ def produtos(request):
     }
     return render(request, 'produtos.html', context)
 
+@login_required(login_url='logar_usuario')
+def favoritos(request):
+    favoritos = Favorito.objects.filter(utilizador=request.user)
+    return render(request, 'favoritos.html', {'favoritos': favoritos})
+
 @csrf_exempt
 def add_favorito(request):
     if not request.user.is_authenticated:

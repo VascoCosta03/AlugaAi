@@ -4,95 +4,95 @@
 Message
 {% endblock titulo %}
 {% block conteudo %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Mensagens</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            max-width: 1200px;
-        }
-        .sidebar {
-            background-color: #f0f0f0;
-            padding: 15px;
-            border-right: 1px solid #ddd;
-        }
-        .sidebar img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        .sidebar-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .chat {
-            padding: 20px;
-            background-color: #b2ebf2;
-        }
-        .message {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        .message img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .message-text {
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .message img.bike {
-            width: 200px;
-            height: auto;
-            border-radius: 0;
-        }
-        .chat-input {
-            display: flex;
-            align-items: center;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 20px;
-        }
-        .chat-input input {
-            flex-grow: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 20px;
-            margin-right: 10px;
-        }
-        .chat-input button {
-            background-color: #007bff;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            cursor: pointer;
-        }
-        .conversas-header {
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
+<style>
+    .container {
+        max-width: 1200px;
+    }
 
-<!-- Start Section -->
+    .sidebar {
+        background-color: #f0f0f0;
+        padding: 15px;
+        border-right: 1px solid #ddd;
+    }
+
+    .sidebar img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .sidebar-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat {
+        padding: 20px;
+        background-color: #b2ebf2;
+    }
+
+    .message {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .message img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .message-text {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .message img.bike {
+        width: 200px;
+        height: auto;
+        border-radius: 0;
+    }
+
+    .chat-input {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .chat-input input {
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 20px;
+        margin-right: 10px;
+    }
+
+    .chat-input button {
+        background-color: #007bff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .conversas-header {
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+</style>
 <section class="container py-5">
     <div class="row">
         <div class="col-md-4 sidebar">
@@ -150,12 +150,6 @@ Message
         </div>
     </div>
 </section>
-<!-- End Section -->
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
 
 {% endblock conteudo %}
