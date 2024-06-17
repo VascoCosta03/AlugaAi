@@ -65,7 +65,11 @@
                 $(classProdutoFavorite).addClass(response.color);
             },
             error: function (xhr, errmsg, err) {
-                console.error("Erro ao adicionar aos favoritos: " + errmsg);
+                if (xhr.status === 401) {
+                    window.location.href = "{% url 'logar_usuario' %}";
+                } else {
+                    console.error("Erro ao adicionar aos favoritos: " + errmsg);
+                }
             }
         });
     }

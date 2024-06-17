@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -20,19 +21,6 @@ class Localizacao(models.Model):
     def __str__(self):
         return self.localizacao
     
-class Utilizador(models.Model):
-    id_utilizador = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=255)
-    email = models.EmailField()
-    password = models.CharField(max_length=255)
-    foto_url = models.CharField(max_length=255, default='null')
-    saldo = models.FloatField()
-
-    def __str__(self):
-        return self.nome
-    
-    def get_anuncio_count(self):
-        return Anuncio.objects.filter(utilizador=self).count()
     
 class Anuncio(models.Model):
     ESTADO_CHOICES = (
@@ -42,7 +30,7 @@ class Anuncio(models.Model):
     )
     
     id_anuncio = models.AutoField(primary_key=True)
-    utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    utilizador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     localizacao = models.ForeignKey(Localizacao, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=255)
@@ -61,15 +49,13 @@ class Anuncio(models.Model):
     def get_aluguer_count(self):
         return ProdutoAlugado.objects.filter(anuncio=self).count()
     
-    def get_color(self):
-        if Favorito.objects.filter(anuncio=self, utilizador=1).count() > 0:
-            return "text-danger"
-        return "text-muted"
+    def is_favorited_by_user(self, user):
+        return Favorito.objects.filter(anuncio=self, utilizador=user).exists()
     
 class Favorito(models.Model):
     id_favorito = models.AutoField(primary_key=True)
     anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE)
-    utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    utilizador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.id_favorito
@@ -77,7 +63,7 @@ class Favorito(models.Model):
 class ProdutoAlugado(models.Model):
     
     id_produto_alugado = models.AutoField(primary_key=True)
-    utilizador = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    utilizador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE, related_name='produtoalugado')
     data_inicio = models.DateField()
     data_fim = models.DateField()
@@ -88,8 +74,8 @@ class ProdutoAlugado(models.Model):
     
 class Chat(models.Model):
     id_chat = models.AutoField(primary_key=True)
-    utilizador1 = models.ForeignKey(Utilizador, on_delete=models.CASCADE, related_name='chats_started')  # New related_name
-    utilizador2 = models.ForeignKey(Utilizador, on_delete=models.CASCADE, related_name='chats_participating')  # New related_name
+    utilizador1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_started')  # New related_name
+    utilizador2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_participating')  # New related_name
 
 
 
@@ -99,7 +85,7 @@ class Chat(models.Model):
 class Mensagem(models.Model):
     id_mensagem = models.AutoField(primary_key=True)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
-    remetente = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    remetente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     mensagem = models.TextField()
     data = models.DateTimeField()
 

@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Categoria, Anuncio, Localizacao, Utilizador, Favorito
+from .models import Categoria, Anuncio, Localizacao, Favorito
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from .forms import CustomUserCreationForm
 import logging
 
 logger = logging.getLogger(__name__)
@@ -43,6 +44,11 @@ def produtos(request):
     localizacoes = Localizacao.objects.all().order_by('id_localizacao')
     anuncios = Anuncio.objects.filter(ativo=True).order_by('id_anuncio')
     filters = {}
+    ids_favoritos = {}
+    
+    if request.user.is_authenticated:
+        favoritos = Favorito.objects.filter(utilizador=request.user)
+        ids_favoritos = favoritos.values_list('anuncio_id', flat=True)
     
     categoria_id = request.GET.get('categoria')
     if categoria_id:
@@ -58,29 +64,27 @@ def produtos(request):
         'categorias': categorias,
         'localizacoes': localizacoes,
         'anuncios': anuncios,
-        'filtros': filters
+        'filtros': filters,
+        'favoritos': ids_favoritos
     }
     return render(request, 'produtos.html', context)
 
 @csrf_exempt
 def add_favorito(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Usuário não autenticado"}, status=401)
+    
     if request.method == "POST":
         try:
             anuncio_id = request.POST.get('anuncio_id')
             if not anuncio_id:
                 return JsonResponse({"error": "Anúncio ID não fornecido"}, status=400)
-
             try:
                 anuncio = Anuncio.objects.get(id_anuncio=anuncio_id)
             except Anuncio.DoesNotExist:
                 return JsonResponse({"error": "Anúncio não encontrado"}, status=404)
             
-            # Substitua pelo id do utilizador apropriado
-            utilizador_id = 1  
-            try:
-                utilizador = Utilizador.objects.get(id_utilizador=utilizador_id)
-            except Utilizador.DoesNotExist:
-                return JsonResponse({"error": "Utilizador não encontrado"}, status=404)
+            utilizador = request.user
 
             # Verificar se o favorito já existe
             favorito, created = Favorito.objects.get_or_create(anuncio=anuncio, utilizador=utilizador)
@@ -95,20 +99,14 @@ def add_favorito(request):
             return JsonResponse({"error": "Erro interno do servidor"}, status=500)
     return JsonResponse({"error": "Método não permitido"}, status=405)
 
-
-@login_required(login_url='index')
-def dashboard(request):
-    return render(request, 'dashboard.html')
-
-
 def cadastrar_usuario(request):
     if request.method == "POST":
-        form_usuario = UserCreationForm(request.POST)
+        form_usuario = CustomUserCreationForm(request.POST)
         if form_usuario.is_valid():
             form_usuario.save()
             return redirect('index')
     else:
-        form_usuario = UserCreationForm()
+        form_usuario = CustomUserCreationForm()
     return render(request, 'usuarios/form_usuario.html', {"form_usuario": form_usuario})
 
 

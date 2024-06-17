@@ -98,15 +98,25 @@ Aluga Ai - Produtos
                                         <h6 class="text-decoration-none col-10">
                                             {{ anuncio.titulo }}
                                         </h6>
-                                        <i class="col-2 fa fa-heart mt-2 fa-lg {{ anuncio.get_color }}"
+                                        {% if request.user.is_authenticated %}
+                                        {% if anuncio.id_anuncio in favoritos %}
+                                        <i class="col-2 fa fa-heart mt-2 fa-lg text-danger"
                                             onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                                        {% else %}
+                                        <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
+                                            onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                                        {% endif %}
+                                        {% else %}
+                                        <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
+                                            onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                                        {% endif %}
                                     </div>
                                     <div class="row">
                                         <p class="fw-bold">{{ anuncio.preco|floatformat:2 }} €/Dia</p>
                                     </div>
                                     <div class="row mt-5">
                                         <p class="text-decoration-none col-10">
-                                            {{ anuncio.utilizador.nome }}
+                                            {{ anuncio.utilizador.first_name }}
                                         </p>
                                         <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
                                     </div>

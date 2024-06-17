@@ -16,6 +16,16 @@
             {{form_usuario.username}}
         </div>
         <div class="form-group">
+            {{form_usuario.first_name.errors}}
+            <label>Primeiro nome: </label>
+            {{form_usuario.first_name}}
+        </div>
+        <div class="form-group">
+            {{form_usuario.last_name.errors}}
+            <label>Último nome: </label>
+            {{form_usuario.last_name}}
+        </div>
+        <div class="form-group">
             {{form_usuario.password1.errors}}
             <label>Senha: </label>
             {{form_usuario.password1}}
