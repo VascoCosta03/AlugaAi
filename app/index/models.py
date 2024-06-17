@@ -10,18 +10,14 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.categoria
-    
-    def get_anuncio_count(self):
-        return Anuncio.objects.filter(categoria=self).count()
-    
+
 class Localizacao(models.Model):
     id_localizacao = models.AutoField(primary_key=True)
     localizacao = models.CharField(max_length=255)
 
     def __str__(self):
         return self.localizacao
-    
-    
+
 class Anuncio(models.Model):
     ESTADO_CHOICES = (
         ("Novo", "Novo"),
@@ -33,16 +29,19 @@ class Anuncio(models.Model):
     utilizador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     localizacao = models.ForeignKey(Localizacao, on_delete=models.CASCADE)
-    titulo = models.CharField(max_length=255)
+    titulo = models.CharField(max_length=255, default='Título do Anúncio')
     preco = models.FloatField()
     foto_url = models.CharField(max_length=255, default='null')
-    ativo = models.BooleanField()
-    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES)
-    descricao = models.TextField(default='null')
+    ativo = models.BooleanField(default=True)
+    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default="Novo")
+    descricao = models.TextField()
 
     def __str__(self):
         return self.titulo
     
+    def get_anuncio_count(self):
+        return Anuncio.objects.filter(utilizador=self).count()
+        
     def get_favorite_count(self):
         return Favorito.objects.filter(anuncio=self).count()
     
@@ -67,7 +66,6 @@ class ProdutoAlugado(models.Model):
     anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE, related_name='produtoalugado')
     data_inicio = models.DateField()
     data_fim = models.DateField()
-    preco_total = models.FloatField()
 
     def __str__(self):
         return self.anuncio.titulo
@@ -76,8 +74,6 @@ class Chat(models.Model):
     id_chat = models.AutoField(primary_key=True)
     utilizador1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_started')  # New related_name
     utilizador2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_participating')  # New related_name
-
-
 
     def __str__(self):
         return self.id_chat

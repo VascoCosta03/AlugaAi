@@ -155,7 +155,6 @@ def cadastrar_usuario(request):
         form_usuario = CustomUserCreationForm()
     return render(request, 'usuarios/form_usuario.html', {"form_usuario": form_usuario})
 
-
 def logar_usuario(request):
     if request.method == "POST":
         form_login = AuthenticationForm(request, data=request.POST)
@@ -174,7 +173,68 @@ def logar_usuario(request):
         form_login = AuthenticationForm()
     return render(request, 'usuarios/login.html', {"form_login": form_login})
 
-
 def deslogar_usuario(request):
     logout(request)
     return redirect('index')
+
+def adicionar(request):
+    if request.method == 'POST':
+        categoria_id = request.POST.get('categoria')
+        localizacao_id = request.POST.get('localizacao')
+        preco = request.POST.get('preco')
+        descricao = request.POST.get('descricao')
+        link = request.POST.get('link')
+
+        # Verificar se todos os campos necessários foram preenchidos
+        if not (categoria_id and localizacao_id and preco and descricao):
+            messages.error(request, 'Todos os campos devem ser preenchidos.')
+            return render(request, 'index.html')
+
+        try:
+            # Verificar se a categoria e a localização existem
+            categoria = Categoria.objects.get(id_categoria=categoria_id)
+            localizacao = Localizacao.objects.get(id_localizacao=localizacao_id)
+            utilizador = request.user
+
+            # Criar ou obter o anúncio
+            anuncio, created = Anuncio.objects.get_or_create(
+                utilizador=utilizador, 
+                categoria=categoria, 
+                localizacao=localizacao, 
+                titulo="teste",
+                preco=preco, 
+                foto_url=link, 
+                descricao=descricao, 
+            )
+
+            # Redirecionar para a página inicial após a criação do anúncio
+            
+            
+            produtos_relacionados = Anuncio.objects.filter(categoria=categoria).exclude(id_anuncio=anuncio.id_anuncio).order_by('id_anuncio')[:4]
+    
+            context = {
+                'anuncio': anuncio,
+                'produtos_relacionados': produtos_relacionados
+            }
+            return render(request, 'produto.html', context)
+
+        except Categoria.DoesNotExist:
+            return render(request, 'message.html')
+        except Localizacao.DoesNotExist:
+            return render(request, 'produtos.html')
+        except Exception as e:
+            # Adicionar log de erro para identificar problemas
+            return render(request, 'produto.html')
+            print(f"Erro ao criar anúncio: {e}")
+
+        return render(request, 'index.html')
+
+    else:
+        # Obter todas as categorias e localizações para preencher o formulário
+        categorias = Categoria.objects.all().order_by('id_categoria')
+        localizacoes = Localizacao.objects.all().order_by('id_localizacao')
+        context = {
+            'categorias': categorias,
+            'localizacoes': localizacoes
+        }
+        return render(request, 'anuncie.html', context)
