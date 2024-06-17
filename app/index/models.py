@@ -72,8 +72,8 @@ class ProdutoAlugado(models.Model):
     
 class Chat(models.Model):
     id_chat = models.AutoField(primary_key=True)
-    utilizador1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_started')  # New related_name
-    utilizador2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_participating')  # New related_name
+    utilizador1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_started')
+    utilizador2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chats_participating')  
 
     def __str__(self):
         return self.id_chat
