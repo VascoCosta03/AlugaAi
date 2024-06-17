@@ -13,41 +13,39 @@ Anunciar Produto para Aluguer
             <div class="col-lg-8 mt-4">
                 <div class="card shadow-lg">
                     <div class="card-body">
-                        <h1 class="h2 text-center text-primary mb-5">Anuncie o seu produto</h1>
+                        <h1 class="h2 text-center text-primary mb-5">Anunciar Produto para Aluguer</h1>
                         
                         <!-- Formulário de Anúncio -->
-                        <form>
+                        <form method="POST">
+                            {% csrf_token %}
                             <!-- Adicionar Link -->
-                            <div class="text-center mb-4">
-                                <button id="addLinkButton" type="button" class="btn btn-lg btn-secondary">Adicione uma imagem</button>
+                            <div class="mb-4 text-center">
+                                <button id="addLinkButton" type="button" class="btn btn-lg btn-primary">Adicionar Link</button>
                                 <div id="linkInput" class="mt-3" style="display: none;">
-                                    <label for="link" class="form-label">Coloque o link da sua imagem:</label>
-                                    <input type="url" class="form-control" id="link" placeholder="https://exemplo.com">
+                                    <label for="link" class="form-label text-start">Coloque o link da sua imagem:</label>
+                                    <input type="url" class="form-control" id="link" name="link" placeholder="https://exemplo.com">
                                 </div>
                             </div>
                             
                             <!-- Categoria -->
                             <div class="mb-4">
                                 <label for="categoria" class="form-label">Categoria</label>
-                                <select class="form-select" id="categoria" required>
+                                <select class="form-select" id="categoria" name="categoria" required>
                                     <option value="">Selecione uma categoria</option>
-                                    <option value="Eletrônicos">Eletrônicos</option>
-                                    <option value="Móveis">Móveis</option>
-                                    <option value="Veículos">Veículos</option>
-                                    <option value="Imóveis">Imóveis</option>
-                                    <option value="Ferramentas">Ferramentas</option>
-                                    <option value="Outros">Outros</option>
+                                    {% for categoria in categorias %}
+                                    <option value="{{ categoria.id_categoria }}">{{ categoria.categoria }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             
                             <!-- Localização -->
                             <div class="mb-4">
                                 <label for="localizacao" class="form-label">Localização</label>
-                                <select class="form-select" id="localizacao" required>
+                                <select class="form-select" id="localizacao" name="localizacao" required>
                                     <option value="">Selecione a localização</option>
-                                    <option value="Lisboa">Lisboa</option>
-                                    <option value="Porto">Porto</option>
-                                    <option value="Sintra">Sintra</option>
+                                    {% for localizacao in localizacoes %}
+                                    <option value="{{ localizacao.id_localizacao }}">{{ localizacao.localizacao }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             
@@ -56,14 +54,14 @@ Anunciar Produto para Aluguer
                                 <label for="preco" class="form-label">Preço/dia</label>
                                 <div class="input-group">
                                     <span class="input-group-text">€</span>
-                                    <input type="number" class="form-control" id="preco" placeholder="Digite o preço" required>
+                                    <input type="number" class="form-control" id="preco" name="preco" placeholder="Digite o preço" required>
                                 </div>
                             </div>
                             
                             <!-- Descrição -->
                             <div class="mb-4">
                                 <label for="descricao" class="form-label">Descrição do Produto</label>
-                                <textarea class="form-control" id="descricao" rows="5" placeholder="Descreva o seu produto detalhadamente" required></textarea>
+                                <textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="Descreva o produto detalhadamente" required></textarea>
                             </div>
                             
                             <!-- Botão Enviar -->
