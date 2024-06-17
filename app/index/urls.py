@@ -17,4 +17,5 @@ urlpatterns = [
     path('adicionar/', adicionar, name='adicionar'),
     path('add_favorito/', add_favorito, name='add_favorito'),
     path('favoritos/', favoritos, name='favoritos'),
+    path('send_message/', send_message, name='send_message'),
 ]

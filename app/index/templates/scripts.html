@@ -101,6 +101,32 @@
         window.location.href = url.pathname + '?' + params.toString();
     }
 
+    function sendMessage(event, userId) {
+        event.stopPropagation();
+        if (userId == {{ request.user.id }}) {
+            alert('Não é possível enviar mensagem para si mesmo.');
+            return;
+        }
+        $.ajax({
+            url: "{% url 'send_message' %}",
+            type: "POST",
+            data: {
+                user_id: userId,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.href = "{% url 'message' %}";
+            },
+            error: function (xhr, errmsg, err) {
+                if (xhr.status === 401) {
+                    window.location.href = "{% url 'logar_usuario' %}";
+                } else {
+                    console.error("Erro ao enviar mensagem: " + errmsg);
+                }
+            }
+        });
+    }
+
     $(document).ready(function () {
 
         $('#produto_search_btn').on('click', function (e) {

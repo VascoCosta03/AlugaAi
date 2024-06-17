@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Categoria, Anuncio, Localizacao, Favorito
+from .models import Categoria, Anuncio, Localizacao, Favorito, Chat
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -9,6 +9,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import CustomUserCreationForm
 import logging
+from django.conf import settings
+from django.db.models import Q
+from django.contrib.auth import get_user_model
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +36,12 @@ def about(request):
 
 @login_required(login_url='logar_usuario')
 def message(request):
-    return render(request, 'message.html')
+    chats = Chat.objects.filter(Q(utilizador1=request.user) | Q(utilizador2=request.user))
+    
+    context = {
+        'chats': chats
+    }
+    return render(request, 'message.html', context)
 
 @login_required(login_url='logar_usuario')
 def adicionar(request):
@@ -143,6 +151,42 @@ def add_favorito(request):
         except Exception as e:
             logger.error(f"Erro ao adicionar aos favoritos: {e}")
             return JsonResponse({"error": "Erro interno do servidor"}, status=500)
+    return JsonResponse({"error": "Método não permitido"}, status=405)
+
+@csrf_exempt
+def send_message(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Usuário não autenticado"}, status=401)
+
+    if request.method == "POST":
+        try:
+            User = get_user_model()
+            user_id = request.POST.get('user_id')
+
+            if not user_id:
+                return JsonResponse({"error": "user_id não fornecido"}, status=400)
+
+            try:
+                utilizador = User.objects.get(id=user_id)
+            except User.DoesNotExist:
+                return JsonResponse({"error": "Usuário não encontrado"}, status=404)
+            
+            # Remover return desnecessário aqui
+            chats = Chat.objects.filter(
+                (Q(utilizador1=utilizador) & Q(utilizador2=request.user)) | 
+                (Q(utilizador1=request.user) & Q(utilizador2=utilizador))
+            )
+            
+            if chats.exists():
+                chat = chats.first()
+            else:
+                chat = Chat.objects.create(utilizador1=request.user, utilizador2=utilizador)
+                
+            return JsonResponse({"chat_id": chat.id_chat}, status=200)
+        except Exception as e:
+            logger.error(f"Erro ao enviar mensagem: {e}", exc_info=True)
+            return JsonResponse({"error": "Erro interno do servidor"}, status=500)
+    
     return JsonResponse({"error": "Método não permitido"}, status=405)
 
 def cadastrar_usuario(request):
