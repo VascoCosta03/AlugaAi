@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Anunciar Produto para Aluguer
+{% endblock titulo %}
+
+{% block conteudo %}
+
+<!-- Open Content -->
+<section class="bg-info pt-3">
+    <div class="container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mt-4">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h1 class="h2 text-center text-primary mb-5">Anunciar Produto para Aluguer</h1>
+                        
+                        <!-- Formulário de Anúncio -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            <!-- Adicionar Link -->
+                            <div class="mb-4 text-center">
+                                <button id="addLinkButton" type="button" class="btn btn-lg btn-primary">Adicionar Link</button>
+                                <div id="linkInput" class="mt-3" style="display: none;">
+                                    <label for="link" class="form-label text-start">Coloque o link da sua imagem:</label>
+                                    <input type="url" class="form-control" id="link" name="link" placeholder="https://exemplo.com">
+                                </div>
+                            </div>
+                            
+                            <!-- Categoria -->
+                            <div class="mb-4">
+                                <label for="categoria" class="form-label">Categoria</label>
+                                <select class="form-select" id="categoria" name="categoria" required>
+                                    <option value="">Selecione uma categoria</option>
+                                    {% for categoria in categorias %}
+                                    <option value="{{ categoria.id_categoria }}">{{ categoria.categoria }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <!-- Localização -->
+                            <div class="mb-4">
+                                <label for="localizacao" class="form-label">Localização</label>
+                                <select class="form-select" id="localizacao" name="localizacao" required>
+                                    <option value="">Selecione a localização</option>
+                                    {% for localizacao in localizacoes %}
+                                    <option value="{{ localizacao.id_localizacao }}">{{ localizacao.localizacao }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <!-- Preço -->
+                            <div class="mb-4">
+                                <label for="preco" class="form-label">Preço/dia</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input type="number" class="form-control" id="preco" name="preco" placeholder="Digite o preço" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Descrição -->
+                            <div class="mb-4">
+                                <label for="descricao" class="form-label">Descrição do Produto</label>
+                                <textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="Descreva o produto detalhadamente" required></textarea>
+                            </div>
+                            
+                            <!-- Botão Enviar -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById('addLinkButton').addEventListener('click', function() {
+    document.getElementById('linkInput').style.display = 'block';
+});
+</script>
+
+{% endblock conteudo %}
