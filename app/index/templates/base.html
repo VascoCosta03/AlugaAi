@@ -14,7 +14,11 @@
 </head>
 
 <body class="bg-info">
+    {% if request.user.is_authenticated %}
     {% include 'clientes/navbar.html' %}
+    {% else %}
+    {% include 'navbar.html' %}
+    {% endif %}
 
     <main class="container-fluid">
         {% block conteudo %}

@@ -59,6 +59,19 @@ def produtos(request):
     if localizacao_id:
         anuncios = anuncios.filter(localizacao_id=localizacao_id).order_by('id_anuncio')
         filters['localizacao'] = str(Localizacao.objects.get(id_localizacao=localizacao_id))
+    
+    estado_id = request.GET.get('estado')
+    if estado_id:
+        
+        if estado_id == '1':
+            estado = "Novo"
+        elif estado_id == '2':
+            estado = "Semi-novo"
+        else:
+            estado = "Usado"
+            
+        anuncios = anuncios.filter(estado=estado).order_by('id_anuncio')
+        filters['estado'] = str(estado)
         
     context = {
         'categorias': categorias,
