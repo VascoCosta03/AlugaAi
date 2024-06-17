@@ -8,7 +8,6 @@ urlpatterns = [
     path('', index, name='index'),
     path('cadastrar_usuario/', cadastrar_usuario, name='cadastrar_usuario'),
     path('logar_usuario/', logar_usuario, name='logar_usuario'),
-    path('dashboard/', dashboard, name='dashboard'),
     path('produto/<int:id>/', produto, name='produto'),
     path('deslogar_usuario/', deslogar_usuario, name='deslogar_usuario'),
     path('produtos/', produtos, name='produtos'),
@@ -16,4 +15,6 @@ urlpatterns = [
     path('message/', message, name='message'),
     path('anuncie/', adicionar, name='anuncie'),
     path('adicionar/', adicionar, name='adicionar'),
+    path('add_favorito/', add_favorito, name='add_favorito'),
+    path('favoritos/', favoritos, name='favoritos'),
 ]

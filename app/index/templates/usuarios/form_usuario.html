@@ -6,14 +6,24 @@
 
 {% block conteudo %}
 
-    <h1>Registo de User</h1>
+    <h1 style="text-align: center;">Regista-te</h1>
     <form method="post">
         {% csrf_token %}
 
         <div class="form-group">
             {{form_usuario.username.errors}}
-            <label>Nome de usuário: </label>
+            <label>Nome de utilizador: </label>
             {{form_usuario.username}}
+        </div>
+        <div class="form-group">
+            {{form_usuario.first_name.errors}}
+            <label>Primeiro nome: </label>
+            {{form_usuario.first_name}}
+        </div>
+        <div class="form-group">
+            {{form_usuario.last_name.errors}}
+            <label>Último nome: </label>
+            {{form_usuario.last_name}}
         </div>
         <div class="form-group">
             {{form_usuario.password1.errors}}
@@ -22,12 +32,13 @@
         </div>
         <div class="form-group">
             {{form_usuario.password2.errors}}
-            <label>Confirmação de senha: </label>
+            <label>Confirmação da senha: </label>
             {{form_usuario.password2}}
         </div>
 
-        <div class="form-group">
+        <div class="form-group-bt">
             <input type="submit" value="Cadastrar" class="btn btn-primary">
+            <a class="btn btn-primary py-2" href="{% url 'logar_usuario' %}">Sign in</a>
         </div>
 
     </form>
