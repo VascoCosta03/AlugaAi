@@ -307,6 +307,7 @@ def adicionar(request):
         preco = request.POST.get('preco')
         titulo = request.POST.get('titulo')
         descricao = request.POST.get('descricao')
+        estado = request.POST.get('estado')
         link = request.POST.get('link')
 
         # Verificar se todos os campos necessários foram preenchidos
@@ -331,7 +332,8 @@ def adicionar(request):
                 titulo=titulo,
                 preco=preco, 
                 foto_url=link, 
-                descricao=descricao
+                descricao=descricao,
+                estado=estado
             )
 
             # Redirecionar para a página do anúncio após a criação
