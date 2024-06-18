@@ -238,3 +238,7 @@ def adicionar(request):
             'localizacoes': localizacoes
         }
         return render(request, 'anuncie.html', context)
+
+
+def perfil(request):
+    return render(request, 'perfil.html')
