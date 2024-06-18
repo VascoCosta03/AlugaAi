@@ -251,14 +251,11 @@ Página Produto
                     </div>
                     <div class="row mb-3">
                         <div class="col">
-                            <h5>Calendário de Disponibilidade</h5>
-                            <div id="calendar"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
@@ -298,45 +295,11 @@ Página Produto
                 </div>
             </div>
             <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-primary" id="confirmarBtn">Confirmar</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- Include FullCalendar CSS and JS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'pt-br',
-            events: [
-                // Example events, replace with actual data
-                {
-                    title: 'Indisponível',
-                    start: '2024-06-01',
-                    end: '2024-06-03',
-                    display: 'background',
-                    color: '#ff9f89'
-                },
-                {
-                    title: 'Indisponível',
-                    start: '2024-06-08',
-                    end: '2024-06-10',
-                    display: 'background',
-                    color: '#ff9f89'
-                }
-            ]
-        });
-        calendar.render();
-    });
-</script>
 
 <!-- Start Article -->
 <section class="py-5 bg-info">
