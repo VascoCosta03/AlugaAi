@@ -182,13 +182,17 @@ def adicionar(request):
         categoria_id = request.POST.get('categoria')
         localizacao_id = request.POST.get('localizacao')
         preco = request.POST.get('preco')
+        titulo = request.POST.get('titulo')
         descricao = request.POST.get('descricao')
         link = request.POST.get('link')
 
         # Verificar se todos os campos necessários foram preenchidos
-        if not (categoria_id and localizacao_id and preco and descricao):
+        if not (categoria_id and localizacao_id and preco and titulo and descricao and link):
             messages.error(request, 'Todos os campos devem ser preenchidos.')
-            return render(request, 'index.html')
+            return render(request, 'anuncie.html', {
+                'categorias': Categoria.objects.all().order_by('id_categoria'),
+                'localizacoes': Localizacao.objects.all().order_by('id_localizacao')
+            })
 
         try:
             # Verificar se a categoria e a localização existem
@@ -201,33 +205,23 @@ def adicionar(request):
                 utilizador=utilizador, 
                 categoria=categoria, 
                 localizacao=localizacao, 
-                titulo="teste",
+                titulo=titulo,
                 preco=preco, 
                 foto_url=link, 
-                descricao=descricao, 
+                descricao=descricao
             )
 
-            # Redirecionar para a página inicial após a criação do anúncio
-            
-            
-            produtos_relacionados = Anuncio.objects.filter(categoria=categoria).exclude(id_anuncio=anuncio.id_anuncio).order_by('id_anuncio')[:4]
-    
-            context = {
-                'anuncio': anuncio,
-                'produtos_relacionados': produtos_relacionados
-            }
-            return render(request, 'produto.html', context)
+            # Redirecionar para a página do anúncio após a criação
+            return redirect('produto', id=anuncio.id_anuncio)
 
         except Categoria.DoesNotExist:
-            return render(request, 'message.html')
+            messages.error(request, 'Categoria não encontrada.')
         except Localizacao.DoesNotExist:
-            return render(request, 'produtos.html')
+            messages.error(request, 'Localização não encontrada.')
         except Exception as e:
-            # Adicionar log de erro para identificar problemas
-            return render(request, 'produto.html')
-            print(f"Erro ao criar anúncio: {e}")
+            messages.error(request, f'Erro ao criar anúncio: {e}')
 
-        return render(request, 'index.html')
+        return redirect('adicionar')
 
     else:
         # Obter todas as categorias e localizações para preencher o formulário
@@ -238,3 +232,4 @@ def adicionar(request):
             'localizacoes': localizacoes
         }
         return render(request, 'anuncie.html', context)
+
