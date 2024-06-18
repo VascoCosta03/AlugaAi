@@ -24,30 +24,25 @@ Página Produto
                     </div>
                     <!--End Controls-->
                     <!--Start Carousel Wrapper-->
-                    <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item"
-                        data-bs-ride="carousel">
+                    <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
                         <!--Start Slides-->
                         <div class="carousel-inner product-links-wap" role="listbox">
-
                             <!--First slide-->
                             <div class="carousel-item active">
                                 <div class="row">
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" />
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" />
                                         </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" />
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" />
                                         </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" />
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" />
                                         </a>
                                     </div>
                                 </div>
@@ -59,18 +54,15 @@ Página Produto
                                 <div class="row">
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" /> </a>
                                     </div>
                                 </div>
                             </div>
@@ -81,18 +73,15 @@ Página Produto
                                 <div class="row">
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" /> </a>
                                     </div>
                                     <div class="col-4">
                                         <a href="#">
-                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..."
-                                                height="150" /> </a>
+                                            <img src="{{anuncio.foto_url}}" class="card-img-top" alt="..." height="150" /> </a>
                                     </div>
                                 </div>
                             </div>
@@ -149,24 +138,9 @@ Página Produto
                         <h5 class="text-secondary"><strong style="color: black;">Descrição:</strong></h5>
                         <p>{{ anuncio.descricao }}</p>
 
-                        <!--
-    <h5 class="text-secondary"><strong style="color: black;">Especificações:</strong></h5>
-    <ul class="list-unstyled pb-3">
-        <li><i class="fa fa-check text-success"></i> Quadro de alumínio resistente</li>
-        <li><i class="fa fa-check text-success"></i> Suspensão dianteira para maior conforto</li>
-        <li><i class="fa fa-check text-success"></i> Freios a disco para uma parada segura</li>
-        <li><i class="fa fa-check text-success"></i> 21 velocidades para enfrentar qualquer terreno
-        </li>
-        <li><i class="fa fa-check text-success"></i> Pneus largos para melhor aderência</li>
-        <li><i class="fa fa-check text-success"></i> Assento ajustável para maior conforto</li>
-        <li><i class="fa fa-check text-success"></i> Peso máximo do ciclista: 120 kg</li>
-    </ul>
-    -->
-
                         <div class="row pb-3">
                             <div class="col d-grid">
-                                <button class="btn btn-warning btn-lg" name="disponibilidade">Ver
-                                    Disponibilidade</button>
+                                <button class="btn btn-warning btn-lg" name="disponibilidade" data-bs-toggle="modal" data-bs-target="#disponibilidadeModal">Ver Disponibilidade</button>
                             </div>
                             <div class="col d-grid">
                                 <button class="btn btn-success btn-lg" name="alugar">Alugar</button>
@@ -179,6 +153,149 @@ Página Produto
     </div>
 </section>
 
+<!-- Disponibilidade Modal -->
+<div class="modal fade" id="disponibilidadeModal" tabindex="-1" aria-labelledby="disponibilidadeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="disponibilidadeModalLabel">Disponibilidade</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row mb-3">
+                        <div class="col text-center">
+                            <p>Selecione os dias que você deseja alugar o produto. Verifique a disponibilidade no calendário abaixo e marque os dias correspondentes.</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <form id="disponibilidadeForm">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Dia da Semana</th>
+                                                <th>Disponibilidade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Segunda-feira</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="segunda">
+                                                        <label class="form-check-label" for="segunda">10h - 18h</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Terça-feira</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="terca">
+                                                        <label class="form-check-label" for="terca">10h - 18h</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quarta-feira</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="quarta">
+                                                        <label class="form-check-label" for="quarta">10h - 18h</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quinta-feira</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="quinta">
+                                                        <label class="form-check-label" for="quinta">10h - 18h</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sexta-feira</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="sexta">
+                                                        <label class="form-check-label" for="sexta">10h - 18h</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sábado</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="sabado">
+                                                        <label class="form-check-label" for="sabado">10h - 18h</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Domingo</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="domingo">
+                                                        <label class="form-check-label" for="domingo">10h - 18h</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <h5>Calendário de Disponibilidade</h5>
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include FullCalendar CSS and JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt-br',
+            events: [
+                // Example events, replace with actual data
+                {
+                    title: 'Indisponível',
+                    start: '2024-06-01',
+                    end: '2024-06-03',
+                    display: 'background',
+                    color: '#ff9f89'
+                },
+                {
+                    title: 'Indisponível',
+                    start: '2024-06-08',
+                    end: '2024-06-10',
+                    display: 'background',
+                    color: '#ff9f89'
+                }
+            ]
+        });
+        calendar.render();
+    });
+</script>
 
 <!-- Start Article -->
 <section class="py-5 bg-info">
@@ -192,8 +309,7 @@ Página Produto
         <div class="row">
             {% for anuncio in produtos_relacionados %}
             <div class="col-12 col-md-4 mb-4 h-50">
-                <div class="card h-50 card-produto produto-{{ anuncio.id_anuncio }}"
-                    onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
+                <div class="card h-50 card-produto produto-{{ anuncio.id_anuncio }}" onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
                     <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
                     <div class="card-body pb-0">
                         <div class="row">
@@ -202,15 +318,12 @@ Página Produto
                             </h6>
                             {% if request.user.is_authenticated %}
                             {% if anuncio.id_anuncio in favoritos %}
-                            <i class="col-2 fa fa-heart mt-2 fa-lg text-danger"
-                                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                            <i class="col-2 fa fa-heart mt-2 fa-lg text-danger" onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
                             {% else %}
-                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
-                                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted" onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
                             {% endif %}
                             {% else %}
-                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
-                                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                            <i class="col-2 fa fa-heart mt-2 fa-lg text-muted" onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
                             {% endif %}
                         </div>
                         <div class="row">
@@ -263,4 +376,4 @@ Página Produto
             });
         </script>
 
-        {% endblock conteudo %}
+{% endblock conteudo %}
