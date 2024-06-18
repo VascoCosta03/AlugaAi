@@ -299,6 +299,7 @@ def deslogar_usuario(request):
     logout(request)
     return redirect('index')
 
+@login_required(login_url='logar_usuario')
 def adicionar(request):
     if request.method == 'POST':
         categoria_id = request.POST.get('categoria')
