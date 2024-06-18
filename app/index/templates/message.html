@@ -33,16 +33,30 @@ Message
         background-color: #b2ebf2;
     }
 
-    .message {
-        margin-bottom: 10px;
+    .messages {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        /* Espaço entre mensagens */
+    }
+
+    .message {
+        display: flex;
     }
 
     .message-text {
         background-color: #fff;
         padding: 10px;
         border-radius: 10px;
+        max-width: 60%;
+        word-wrap: break-word;
+    }
+
+    .message-text.bg-info {
+        margin-left: auto;
+        /* Alinha à direita */
+        text-align: right;
+        /* Alinha o texto à direita */
     }
 
     .chat-input {
@@ -101,7 +115,7 @@ Message
                 <h2 class="mb-0">Conversas</h2>
             </div>
             {% for chat in chats %}
-            <div class="shadow p-3 mb-5 bg-body rounded chats">
+            <div class="shadow p-3 mb-3 bg-body rounded chats" onclick="changeChat({{ chat.id_chat }})">
                 {% if request.user.id != chat.utilizador1.id %}
                 {{ chat.utilizador1.first_name }}
                 {% else %}
@@ -112,27 +126,47 @@ Message
         </div>
         <div class="col-md-8 chat mb-2">
             <div class="chat-header mb-3 text-center">
-                <h2 class="mb-0">NOME_DO_UTILIZADOR</h2>
+                {% if chats %}
+                {% with first_chat=chats.0 %}
+                {% if request.user.id != first_chat.utilizador1.id %}
+                <h2 class="mb-0" id="nome_chat">{{ first_chat.utilizador1.first_name }}</h2>
+                {% else %}
+                <h2 class="mb-0" id="nome_chat">{{ first_chat.utilizador2.first_name }}</h2>
+                {% endif %}
+                {% endwith %}
+                {% else %}
+                <h2 class="mb-0">No Chats Available</h2>
+                {% endif %}
             </div>
+            {% if chats %}
+            {% with first_chat=chats.0 %}
+            <input type="hidden" name="id_chat" id="id_chat" value="{{ first_chat.id_chat }}">
             <div class="messages">
+                {% for message in messages %}
+                {% if message.chat.id_chat == first_chat.id_chat %}
+                {% if request.user.id != message.remetente.id %}
                 <div class="message">
-                    <div class="message-text">BOM DIA</div>
+                    <div class="message-text">{{ message.mensagem }}</div>
                 </div>
+                {% else %}
                 <div class="message">
-                    <div class="message-text">TÁ EM PÉ</div>
+                    <div class="message-text bg-info">{{ message.mensagem }}</div>
                 </div>
-                <div class="message" style="float: right;">
-                    <div class="message-text bg-info">MOSTRA!</div>
-                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% endwith %}
+                {% endif %}
             </div>
             <div class="chat-input mt-5" style="margin-top: 25px;">
-                <button><i class="fas fa-plus"></i></button>
-                <input type="text" placeholder="Type a message...">
-                <button><i class="fas fa-camera"></i></button>
+                <input type="text" placeholder="Escreva a sua mensagem..." id="mensagem_texto">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 </section>
+
+
 
 
 {% endblock conteudo %}

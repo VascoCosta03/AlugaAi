@@ -83,7 +83,6 @@ class Mensagem(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
     remetente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     mensagem = models.TextField()
-    data = models.DateTimeField()
 
     def __str__(self):
         return self.mensagem
