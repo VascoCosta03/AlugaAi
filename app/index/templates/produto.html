@@ -202,6 +202,45 @@ Página Produto
 </div> 
 
 
+<!-- Alugar Modal -->
+<div class="modal fade" id="AlugarModal" tabindex="-1" aria-labelledby="AlugarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="AlugarModalLabel">Alugar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row mb-3">
+                        <div class="col text-center">
+                            <p>Selecione o período que você deseja alugar o produto. Verifique a disponibilidade no calendário abaixo e selecione a data de início e fim.</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <form id="disponibilidadeForm">
+                                <div class="mb-3">
+                                    <label for="dataInicio" class="form-label">Data de Início</label>
+                                    <input type="date" class="form-control" id="dataInicio" name="dataInicio" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dataFim" class="form-label">Data de Fim</label>
+                                    <input type="date" class="form-control" id="dataFim" name="dataFim" required>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-primary"  onclick="alugar({{anuncio.id_anuncio}})">Confirmar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Start Article -->
 <section class="py-5 bg-info">

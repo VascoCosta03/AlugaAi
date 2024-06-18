@@ -21,5 +21,6 @@ urlpatterns = [
     path('create_chat/', create_chat, name='create_chat'),
     path('change_chat/', change_chat, name='change_chat'),
     path('send_message/', send_message, name='send_message'),
+    path('alugar/', alugar, name='alugar'),
     
 ]

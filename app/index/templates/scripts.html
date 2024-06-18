@@ -187,6 +187,35 @@
         });
     }
 
+    function alugar(anuncioId){
+        if(anuncioId == {{ request.user.id }}){
+            alert('Não é possível alugar o próprio produto.');
+            return;
+        }
+        dataInicio = $('#dataInicio').val();
+        dataFim = $('#dataFim').val();
+        $.ajax({
+            url: "{% url 'alugar' %}",
+            type: "POST",
+            data: {
+                anuncio_id: anuncioId,
+                data_inicio: dataInicio,
+                data_fim: dataFim,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.href = "{% url 'perfil' %}";
+            },
+            error: function (xhr, errmsg, err) {
+                if (xhr.status === 401) {
+                    window.location.href = "{% url 'logar_usuario' %}";
+                } else {
+                    console.error("Erro ao alugar: " + errmsg);
+                }
+            }
+        });
+    }
+
     $(document).ready(function () {
 
         $('#produto_search_btn').on('click', function (e) {
