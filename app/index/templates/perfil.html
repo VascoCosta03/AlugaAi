@@ -67,8 +67,9 @@ Aluga Ai
                                         <p class="fw-bold">{{ anuncio.anuncio.preco|floatformat:2 }} €/Dia</p>
                                     </div>
                                     <div>
-                                        <p><strong>Data de Início:</strong> {{ anuncio.data_inicio }}</p>
-                                        <p><strong>Data de Fim:</strong> {{ anuncio.data_fim }}</p>
+                                        <p><strong>Data de Início:</strong> {{ alugado.data_inicio|date:"d F Y" }} 
+                                        <p><strong>Data de Fim:</strong> {{ alugado.data_fim|date:"d F Y" }}
+                                            
                                     </div>
                                     <div class="row mt-4">
                                         <p class="text-decoration-none col-10">
