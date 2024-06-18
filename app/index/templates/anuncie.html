@@ -60,8 +60,19 @@ Anunciar Produto para Aluguer
                                 <label for="preco" class="form-label">Preço/dia</label>
                                 <div class="input-group">
                                     <span class="input-group-text">€</span>
-                                    <input type="number" class="form-control" id="preco" name="preco" placeholder="Digite o preço" required>
+                                    <input type="number" class="form-control" id="preco" name="preco" placeholder="Digite o preço" min="1" step="any" required>
                                 </div>
+                            </div>
+                            
+                            <!-- Estado do Produto -->
+                            <div class="mb-4">
+                                <label for="estado" class="form-label">Estado do Produto</label>
+                                <select class="form-select" id="estado" name="estado" required>
+                                    <option value="">Selecione o estado</option>
+                                    <option value="Novo">Novo</option>
+                                    <option value="Semi-novo">Semi-novo</option>
+                                    <option value="Usado">Usado</option>
+                                </select>
                             </div>
                             
                             <!-- Descrição -->
