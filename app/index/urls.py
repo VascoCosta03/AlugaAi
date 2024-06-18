@@ -17,6 +17,7 @@ urlpatterns = [
     path('adicionar/', adicionar, name='adicionar'),
     path('add_favorito/', add_favorito, name='add_favorito'),
     path('favoritos/', favoritos, name='favoritos'),
+    path('perfil/', perfil, name='perfil'),
     path('create_chat/', create_chat, name='create_chat'),
     path('change_chat/', change_chat, name='change_chat'),
     path('send_message/', send_message, name='send_message'),

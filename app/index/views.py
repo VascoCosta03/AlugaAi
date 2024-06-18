@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Categoria, Anuncio, Localizacao, Favorito, Chat, Mensagem
+from .models import Categoria, Anuncio, Localizacao, Favorito, Chat, Mensagem, ProdutoAlugado
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -358,3 +358,11 @@ def adicionar(request):
         }
         return render(request, 'anuncie.html', context)
 
+def perfil(request):
+    anunciados = Anuncio.objects.filter(utilizador=request.user)
+    alugados = ProdutoAlugado.objects.filter(utilizador=request.user)
+    context = {
+        'anunciados': anunciados,
+        'alugados': alugados
+    }
+    return render(request, 'perfil.html', context)

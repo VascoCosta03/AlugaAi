@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Aluga Ai
+{% endblock titulo %}
+
+{% block conteudo %}
+
+<section class="bg-info pt-3 mb-5">
+    <div class="container py-5">
+        <div class="row">
+
+            <div class="col-lg-12"> <!-- Ajuda aqui -->
+                <div>
+                    <div class="row text-dark">
+<h1>Anunciados</h1>
+    {% for anuncio in anunciados %}
+                        <div class="col-12 col-md-3 mb-4 h-50">
+                            <div class="card h-50 card-produto produto-{{ anuncio.id_anuncio }}"
+                                onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
+                                <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
+                                <div class="card-body pb-0">
+                                    <div class="row">
+                                        <h6 class="text-decoration-none col-10">
+                                            {{ anuncio.titulo }}
+                                        </h6>
+                                        <i class="col-2 fa fa-heart mt-2 fa-lg text-danger"
+                                            onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+                                    </div>
+                                    <div class="row">
+                                        <p class="fw-bold">{{ anuncio.preco|floatformat:2 }} €/Dia</p>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <p class="text-decoration-none col-10">
+                                            {{ anuncio.utilizador.first_name }}
+                                        </p>
+                                        <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <div class="row text-dark">
+<h1>Alugados</h1>
+    {% for anuncio in alugados%}
+                        <div class="col-12 col-md-3 mb-4 h-50">
+                            <div class="card h-50 card-produto produto-{{ anuncio.anuncio.id_anuncio }}"
+                                onclick="window.location.href='{% url 'produto' anuncio.anuncio.id_anuncio %}'">
+                                <img src="{{ anuncio.anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
+                                <div class="card-body pb-0">
+                                    <div class="row">
+                                        <h6 class="text-decoration-none col-10">
+                                            {{ anuncio.anuncio.titulo }}
+                                        </h6>
+                                        <i class="col-2 fa fa-heart mt-2 fa-lg text-danger"
+                                            onclick="addFavorito(event, {{ anuncio.anuncio.id_anuncio }})"></i>
+                                    </div>
+                                    <div class="row">
+                                        <p class="fw-bold">{{ anuncio.anuncio.preco|floatformat:2 }} €/Dia</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>Data de Início:</strong> {{ anuncio.data_inicio }}</p>
+                                        <p><strong>Data de Fim:</strong> {{ anuncio.data_fim }}</p>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <p class="text-decoration-none col-10">
+                                            {{ anuncio.anuncio.utilizador.first_name }}
+                                        </p>
+                                        <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock conteudo %}
