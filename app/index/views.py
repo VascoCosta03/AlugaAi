@@ -61,6 +61,30 @@ def produto(request, id):
     }
     return render(request, 'produto.html', context)
 
+@csrf_exempt
+def alugar(request):
+    if request.method == "POST":
+        try:
+            anuncio_id = request.POST.get('anuncio_id')
+            dataInicio = request.POST.get('data_inicio')
+            dataFim = request.POST.get('data_fim')
+            utilizador = request.user
+
+            if not anuncio_id:
+                return JsonResponse({"error": "Anúncio ID não fornecido"}, status=400)
+            try:
+                anuncio = Anuncio.objects.get(id_anuncio=anuncio_id)
+
+                anuncio_alugado = ProdutoAlugado.objects.create(anuncio=anuncio, data_inicio=dataInicio, data_fim=dataFim, utilizador=utilizador)
+            except Anuncio.DoesNotExist:
+                return JsonResponse({"error": "Anúncio não encontrado"}, status=404)
+            return JsonResponse({"success": "Produto alugado"}, status=200)
+        except Exception as e:
+            logger.error(f"Erro ao alugar produto: {e}")
+            return JsonResponse({"error": "Erro interno do servidor"}, status=500)
+    return JsonResponse({"error": "Método não permitido"}, status=405)
+
+
 def produtos(request):
     categorias = Categoria.objects.all().order_by('id_categoria')
     localizacoes = Localizacao.objects.all().order_by('id_localizacao')
