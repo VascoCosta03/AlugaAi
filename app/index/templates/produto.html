@@ -143,7 +143,7 @@ Página Produto
                                 <button class="btn btn-warning btn-lg" name="disponibilidade" data-bs-toggle="modal" data-bs-target="#disponibilidadeModal">Ver Disponibilidade</button>
                             </div>
                             <div class="col d-grid">
-                                <button class="btn btn-success btn-lg" name="alugar" data-bs-toggle="modal" data-bs-target="#AlugarModal">Alugar</button>
+                                <button class="btn btn-success btn-lg" name="alugar">Alugar</button>
                             </div>
                         </div>
                     </div>
@@ -175,84 +175,23 @@ Página Produto
                                     <table class="table table-bordered">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>Dia da Semana</th>
-                                                <th>Disponibilidade</th>
+                                                <th>Data Início</th>
+                                                <th>Data Fim</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for alugado in alugados%}
                                             <tr>
-                                                <td>Segunda-feira</td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="segunda">
-                                                        <label class="form-check-label" for="segunda">10h - 18h</label>
-                                                    </div>
-                                                </td>
+                                                <td>{{ alugado.data_inicio|date:"d F Y" }}</td>
+                                                <td>{{ alugado.data_fim|date:"d F Y" }}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Terça-feira</td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="terca">
-                                                        <label class="form-check-label" for="terca">10h - 18h</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Quarta-feira</td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="quarta">
-                                                        <label class="form-check-label" for="quarta">10h - 18h</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Quinta-feira</td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="quinta">
-                                                        <label class="form-check-label" for="quinta">10h - 18h</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sexta-feira</td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="sexta">
-                                                        <label class="form-check-label" for="sexta">10h - 18h</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sábado</td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="sabado">
-                                                        <label class="form-check-label" for="sabado">10h - 18h</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Domingo</td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="domingo">
-                                                        <label class="form-check-label" for="domingo">10h - 18h</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="modal-footer bg-light">
@@ -260,46 +199,9 @@ Página Produto
             </div>
         </div>
     </div>
-</div>
+</div> 
 
-<!-- Alugar Modal -->
-<div class="modal fade" id="AlugarModal" tabindex="-1" aria-labelledby="AlugarModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="AlugarModalLabel">Alugar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row mb-3">
-                        <div class="col text-center">
-                            <p>Selecione o período que você deseja alugar o produto. Verifique a disponibilidade no calendário abaixo e selecione a data de início e fim.</p>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <form id="disponibilidadeForm">
-                                <div class="mb-3">
-                                    <label for="dataInicio" class="form-label">Data de Início</label>
-                                    <input type="date" class="form-control" id="dataInicio" name="dataInicio" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="dataFim" class="form-label">Data de Fim</label>
-                                    <input type="date" class="form-control" id="dataFim" name="dataFim" required>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-    
-                </div>
-            </div>
-            <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- Start Article -->
 <section class="py-5 bg-info">

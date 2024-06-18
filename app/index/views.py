@@ -54,10 +54,12 @@ def adicionar(request):
 def produto(request, id):
     anuncio = Anuncio.objects.get(id_anuncio=id)
     produtos_relacionados = Anuncio.objects.filter(categoria=anuncio.categoria).exclude(id_anuncio=id).order_by('id_anuncio')[:4]
+    alugados = ProdutoAlugado.objects.filter(anuncio=anuncio)
     
     context = {
         'anuncio': anuncio,
-        'produtos_relacionados': produtos_relacionados
+        'produtos_relacionados': produtos_relacionados, 
+        'alugados': alugados
     }
     return render(request, 'produto.html', context)
 
