@@ -88,9 +88,10 @@ Aluga Ai - Produtos
                 <div class="row mb-2">
                     <form class="form-inline">
                         <div class="col-11 d-flex">
-                            <input class="form-control mr-sm-2" id="produto_search" type="search" placeholder="Pesquisar"
-                                aria-label="Search">
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id="produto_search_btn">Pesquisar</button>
+                            <input class="form-control mr-sm-2" id="produto_search" type="search"
+                                placeholder="Pesquisar" aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit"
+                                id="produto_search_btn">Pesquisar</button>
                         </div>
                     </form>
                 </div>
@@ -127,7 +128,9 @@ Aluga Ai - Produtos
                                         <p class="text-decoration-none col-10">
                                             {{ anuncio.utilizador.first_name }}
                                         </p>
-                                        <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
+                                        <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"
+                                            onclick="createChat(event, {{ anuncio.utilizador.id}})">
+                                        </i>
                                     </div>
                                 </div>
                             </div>
