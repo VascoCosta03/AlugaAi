@@ -143,7 +143,7 @@ Página Produto
                                 <button class="btn btn-warning btn-lg" name="disponibilidade" data-bs-toggle="modal" data-bs-target="#disponibilidadeModal">Ver Disponibilidade</button>
                             </div>
                             <div class="col d-grid">
-                                <button class="btn btn-success btn-lg" name="alugar">Alugar</button>
+                                <button class="btn btn-success btn-lg" name="alugar" data-bs-toggle="modal" data-bs-target="#AlugarModal">Alugar</button>
                             </div>
                         </div>
                     </div>
@@ -264,6 +264,47 @@ Página Produto
         </div>
     </div>
 </div>
+
+<!-- Alugar Modal -->
+<div class="modal fade" id="AlugarModal" tabindex="-1" aria-labelledby="AlugarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="AlugarModalLabel">Alugar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row mb-3">
+                        <div class="col text-center">
+                            <p>Selecione o período que você deseja alugar o produto. Verifique a disponibilidade no calendário abaixo e selecione a data de início e fim.</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <form id="disponibilidadeForm">
+                                <div class="mb-3">
+                                    <label for="dataInicio" class="form-label">Data de Início</label>
+                                    <input type="date" class="form-control" id="dataInicio" name="dataInicio" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dataFim" class="form-label">Data de Fim</label>
+                                    <input type="date" class="form-control" id="dataFim" name="dataFim" required>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-primary" id="confirmarBtn">Confirmar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Include FullCalendar CSS and JS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
