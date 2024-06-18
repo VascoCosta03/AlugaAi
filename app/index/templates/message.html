@@ -33,29 +33,30 @@ Message
         background-color: #b2ebf2;
     }
 
-    .message {
-        margin-bottom: 10px;
+    .messages {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        /* Espaço entre mensagens */
     }
 
-    .message img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-right: 10px;
+    .message {
+        display: flex;
     }
 
     .message-text {
         background-color: #fff;
         padding: 10px;
         border-radius: 10px;
+        max-width: 60%;
+        word-wrap: break-word;
     }
 
-    .message img.bike {
-        width: 200px;
-        height: auto;
-        border-radius: 0;
+    .message-text.bg-info {
+        margin-left: auto;
+        /* Alinha à direita */
+        text-align: right;
+        /* Alinha o texto à direita */
     }
 
     .chat-input {
@@ -92,64 +93,80 @@ Message
         border-bottom: 1px solid #ddd;
         padding-bottom: 10px;
     }
+
+    .chats {
+        cursor: pointer;
+    }
+
+    .chats:hover {
+        background-color: rebeccapurple;
+    }
+
+    .chats span {
+        font-size: 12px;
+        color: #777;
+        float: right;
+    }
 </style>
 <section class="container py-5">
     <div class="row">
         <div class="col-md-4 sidebar">
-            <div class="coversas-header mb-3 text-center">
+            <div class="coversas-header mb-3 text-center fw-bold">
                 <h2 class="mb-0">Conversas</h2>
             </div>
-            <div class="sidebar-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
-                <div class="sidebar-text text-center">
-                    <div>PAULO</div>
-                    <div>12H</div>
-                </div>
+            {% for chat in chats %}
+            <div class="shadow p-3 mb-3 bg-body rounded chats" onclick="changeChat({{ chat.id_chat }})">
+                {% if request.user.id != chat.utilizador1.id %}
+                {{ chat.utilizador1.first_name }}
+                {% else %}
+                {{ chat.utilizador2.first_name }}
+                {% endif %}
             </div>
-            <div class="sidebar-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="João">
-                <div class="sidebar-text">
-                    <div>João</div>
-                    <div>14H</div>
-                </div>
-            </div>
-            <div class="sidebar-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="João">
-                <div class="sidebar-text">
-                    <div>João</div>
-                    <div>24H</div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        <div class="col-md-8 chat">
+        <div class="col-md-8 chat mb-2">
             <div class="chat-header mb-3 text-center">
-                <h2 class="mb-0">NOME_DO_UTILIZADOR</h2>
+                {% if chats %}
+                {% with first_chat=chats.0 %}
+                {% if request.user.id != first_chat.utilizador1.id %}
+                <h2 class="mb-0" id="nome_chat">{{ first_chat.utilizador1.first_name }}</h2>
+                {% else %}
+                <h2 class="mb-0" id="nome_chat">{{ first_chat.utilizador2.first_name }}</h2>
+                {% endif %}
+                {% endwith %}
+                {% else %}
+                <h2 class="mb-0">No Chats Available</h2>
+                {% endif %}
             </div>
+            {% if chats %}
+            {% with first_chat=chats.0 %}
+            <input type="hidden" name="id_chat" id="id_chat" value="{{ first_chat.id_chat }}">
             <div class="messages">
+                {% for message in messages %}
+                {% if message.chat.id_chat == first_chat.id_chat %}
+                {% if request.user.id != message.remetente.id %}
                 <div class="message">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
-                    <div class="message-text">BOM DIA</div>
+                    <div class="message-text">{{ message.mensagem }}</div>
                 </div>
+                {% else %}
                 <div class="message">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
-                    <div class="message-text">TÁ EM PÉ</div>
+                    <div class="message-text bg-info">{{ message.mensagem }}</div>
                 </div>
-                <div class="message">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5987/5987462.png" alt="Paulo">
-                    <div class="message-text">MOSTRA!</div>
-                </div>
-                <div class="message">
-                    <img src="path/to/bike.jpg" alt="Bike" class="bike">
-                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% endwith %}
+                {% endif %}
             </div>
-            <div class="chat-input mt-3">
-                <button><i class="fas fa-plus"></i></button>
-                <input type="text" placeholder="Type a message...">
-                <button><i class="fas fa-camera"></i></button>
+            <div class="chat-input mt-5" style="margin-top: 25px;">
+                <input type="text" placeholder="Escreva a sua mensagem..." id="mensagem_texto">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 </section>
+
+
 
 
 {% endblock conteudo %}

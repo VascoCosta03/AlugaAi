@@ -101,7 +101,8 @@ Aluga Ai
       <a href="#"><img src="{{ categoria.foto_url }}" class="rounded-circle img-fluid border"
           style="width: 350px; height: 350px;" /></a>
       <h5 class="text-center mt-3 mb-3">{{ categoria.categoria }}</h5>
-      <p class="text-center"><a class="btn btn-light" href="{% url 'produtos' %}?categoria={{ categoria.id_categoria }}">Pesquisar</a></p>
+      <p class="text-center"><a class="btn btn-light"
+          href="{% url 'produtos' %}?categoria={{ categoria.id_categoria }}">Pesquisar</a></p>
     </div>
     {% endfor %}
 </section>
@@ -122,38 +123,40 @@ Aluga Ai
       {% for anuncio in anuncios_destaque %}
       <div class="col-12 col-md-3 mb-4 h-50">
         <div class="card h-50 card-produto produto-{{ anuncio.id_anuncio }}"
-            onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
-            <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
-            <div class="card-body pb-0">
-                <div class="row">
-                    <h6 class="text-decoration-none col-10">
-                        {{ anuncio.titulo }}
-                    </h6>
-                    {% if request.user.is_authenticated %}
-                    {% if anuncio.id_anuncio in favoritos %}
-                    <i class="col-2 fa fa-heart mt-2 fa-lg text-danger"
-                        onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
-                    {% else %}
-                    <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
-                        onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
-                    {% endif %}
-                    {% else %}
-                    <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
-                        onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
-                    {% endif %}
-                </div>
-                <div class="row">
-                    <p class="fw-bold">{{ anuncio.preco|floatformat:2 }} €/Dia</p>
-                </div>
-                <div class="row mt-5">
-                    <p class="text-decoration-none col-10">
-                        {{ anuncio.utilizador.first_name }}
-                    </p>
-                    <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"></i>
-                </div>
+          onclick="window.location.href='{% url 'produto' anuncio.id_anuncio %}'">
+          <img src="{{ anuncio.foto_url }}" class="card-img-top" alt="..." height="275" />
+          <div class="card-body pb-0">
+            <div class="row">
+              <h6 class="text-decoration-none col-10">
+                {{ anuncio.titulo }}
+              </h6>
+              {% if request.user.is_authenticated %}
+              {% if anuncio.id_anuncio in favoritos %}
+              <i class="col-2 fa fa-heart mt-2 fa-lg text-danger"
+                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+              {% else %}
+              <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
+                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+              {% endif %}
+              {% else %}
+              <i class="col-2 fa fa-heart mt-2 fa-lg text-muted"
+                onclick="addFavorito(event, {{ anuncio.id_anuncio }})"></i>
+              {% endif %}
             </div>
+            <div class="row">
+              <p class="fw-bold">{{ anuncio.preco|floatformat:2 }} €/Dia</p>
+            </div>
+            <div class="row mt-5">
+              <p class="text-decoration-none col-10">
+                {{ anuncio.utilizador.first_name }}
+              </p>
+              <i class="col-2 fa fa-envelope mt-2 fa-lg text-muted"
+                onclick="createChat(event, {{ anuncio.utilizador.id}})">
+              </i>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
       {% endfor %}
     </div>
   </div>

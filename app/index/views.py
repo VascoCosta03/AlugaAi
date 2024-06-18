@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Categoria, Anuncio, Localizacao, Favorito
+from .models import Categoria, Anuncio, Localizacao, Favorito, Chat, Mensagem, ProdutoAlugado
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
@@ -9,6 +9,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import CustomUserCreationForm
 import logging
+from django.conf import settings
+from django.db.models import Q
+from django.contrib.auth import get_user_model
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +36,16 @@ def about(request):
 
 @login_required(login_url='logar_usuario')
 def message(request):
-    return render(request, 'message.html')
+    chats = Chat.objects.filter(Q(utilizador1=request.user) | Q(utilizador2=request.user))
+
+    messages = []
+    messages = Mensagem.objects.filter(chat__in=chats).order_by('id_mensagem')    
+    
+    context = {
+        'chats': chats,
+        'messages': messages
+    }
+    return render(request, 'message.html', context)
 
 @login_required(login_url='logar_usuario')
 def adicionar(request):
@@ -145,6 +157,116 @@ def add_favorito(request):
             return JsonResponse({"error": "Erro interno do servidor"}, status=500)
     return JsonResponse({"error": "Método não permitido"}, status=405)
 
+@csrf_exempt
+def create_chat(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Usuário não autenticado"}, status=401)
+
+    if request.method == "POST":
+        try:
+            User = get_user_model()
+            user_id = request.POST.get('user_id')
+
+            if not user_id:
+                return JsonResponse({"error": "user_id não fornecido"}, status=400)
+
+            try:
+                utilizador = User.objects.get(id=user_id)
+            except User.DoesNotExist:
+                return JsonResponse({"error": "Usuário não encontrado"}, status=404)
+            
+            # Remover return desnecessário aqui
+            chats = Chat.objects.filter(
+                (Q(utilizador1=utilizador) & Q(utilizador2=request.user)) | 
+                (Q(utilizador1=request.user) & Q(utilizador2=utilizador))
+            )
+            
+            if chats.exists():
+                chat = chats.first()
+            else:
+                chat = Chat.objects.create(utilizador1=request.user, utilizador2=utilizador)
+                
+            return JsonResponse({"chat_id": chat.id_chat}, status=200)
+        except Exception as e:
+            logger.error(f"Erro ao enviar mensagem: {e}", exc_info=True)
+            return JsonResponse({"error": "Erro interno do servidor"}, status=500)
+    
+    return JsonResponse({"error": "Método não permitido"}, status=405)
+
+@csrf_exempt
+def change_chat(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Usuário não autenticado"}, status=401)
+
+    if request.method == "POST":
+        try:
+            chat_id = request.POST.get('chat_id')
+
+            if not chat_id:
+                return JsonResponse({"error": "chat_id não fornecido"}, status=400)
+            try:
+                chat = Chat.objects.get(id_chat=chat_id)
+            except Chat.DoesNotExist:
+                return JsonResponse({"error": "Chat não encontrado"}, status=404)
+            
+            mensagens = Mensagem.objects.filter(chat=chat)
+            
+            chat_data = {
+                "id_chat": chat.id_chat,
+                "utilizador1": chat.utilizador1.id,
+                "utilizador2": chat.utilizador2.id,
+            }
+            
+            if(chat.utilizador1.id == request.user.id):
+                chat_data["nome"] = chat.utilizador2.first_name
+            else:
+                chat_data["nome"] = chat.utilizador1.first_name
+
+            mensagens_data = []
+            
+            for mensagem in mensagens:
+                mensagens_data.append({
+                    "id_mensagem": mensagem.id_mensagem,
+                    "remetente": mensagem.remetente.id,
+                    "mensagem": mensagem.mensagem,
+                })
+
+            return JsonResponse({"chat": chat_data, "mensagens": mensagens_data}, status=200)
+        except Exception as e:
+            logger.error(f"Erro ao enviar mensagem: {e}", exc_info=True)
+            return JsonResponse({"error": "Erro interno do servidor"}, status=500)
+    
+    return JsonResponse({"error": "Método não permitido"}, status=405)
+
+@csrf_exempt
+def send_message(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Usuário não autenticado"}, status=401)
+
+    if request.method == "POST":
+        try:
+            chat_id = request.POST.get('chat_id')
+            mensagem = request.POST.get('mensagem')
+
+            if not chat_id:
+                return JsonResponse({"error": "chat_id não fornecido"}, status=400)
+            if not mensagem:
+                return JsonResponse({"error": "mensagem não fornecida"}, status=400)
+            
+            try:
+                chat = Chat.objects.get(id_chat=chat_id)
+            except Chat.DoesNotExist:
+                return JsonResponse({"error": "Chat não encontrado"}, status=404)
+            
+            mensagem = Mensagem.objects.create(chat=chat, remetente=request.user, mensagem=mensagem)
+            
+            return JsonResponse({"id_mensagem": mensagem.id_mensagem}, status=200)
+        except Exception as e:
+            logger.error(f"Erro ao enviar mensagem: {e}", exc_info=True)
+            return JsonResponse({"error": "Erro interno do servidor"}, status=500)
+    
+    return JsonResponse({"error": "Método não permitido"}, status=405)
+
 def cadastrar_usuario(request):
     if request.method == "POST":
         form_usuario = CustomUserCreationForm(request.POST)
@@ -177,6 +299,7 @@ def deslogar_usuario(request):
     logout(request)
     return redirect('index')
 
+@login_required(login_url='logar_usuario')
 def adicionar(request):
     if request.method == 'POST':
         categoria_id = request.POST.get('categoria')
@@ -184,6 +307,7 @@ def adicionar(request):
         preco = request.POST.get('preco')
         titulo = request.POST.get('titulo')
         descricao = request.POST.get('descricao')
+        estado = request.POST.get('estado')
         link = request.POST.get('link')
 
         # Verificar se todos os campos necessários foram preenchidos
@@ -208,7 +332,8 @@ def adicionar(request):
                 titulo=titulo,
                 preco=preco, 
                 foto_url=link, 
-                descricao=descricao
+                descricao=descricao,
+                estado=estado
             )
 
             # Redirecionar para a página do anúncio após a criação
@@ -233,3 +358,11 @@ def adicionar(request):
         }
         return render(request, 'anuncie.html', context)
 
+def perfil(request):
+    anunciados = Anuncio.objects.filter(utilizador=request.user)
+    alugados = ProdutoAlugado.objects.filter(utilizador=request.user)
+    context = {
+        'anunciados': anunciados,
+        'alugados': alugados
+    }
+    return render(request, 'perfil.html', context)
