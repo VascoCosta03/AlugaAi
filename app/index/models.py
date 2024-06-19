@@ -66,7 +66,6 @@ class ProdutoAlugado(models.Model):
     anuncio = models.ForeignKey(Anuncio, on_delete=models.CASCADE, related_name='produtoalugado')
     data_inicio = models.DateField()
     data_fim = models.DateField()
-
     def __str__(self):
         return self.anuncio.titulo
     
